@@ -1,0 +1,65 @@
+<div id="page-wrapper">
+	<div class="header">
+		<ol class="breadcrumb">
+			<li><a href="#">Home</a></li>
+			<li><a href="#">监控配置</a></li>
+			<li class="active">配置通知</li>
+		</ol>
+
+	</div>
+
+	<div id="page-inner">
+		<div class="panel panel-default">
+		<div class="row">
+	       <div class="col-md-12">
+	           <!-- Advanced Tables -->
+	           <div class="panel panel-default">
+	               <div class="panel-heading">
+	                                  监控信息列表
+	               </div>
+	               <div class="panel-body">
+	                <div class="table-responsive">
+	
+					<div class="container">
+					<div id="toolbar" class="fixed-table-toolbar"
+						style="margin-bottom: -40px">
+					   <button id="addNew" type="button" class="btn btn-default" onclick="javascript:noticeUserList.toInertPage();">&nbsp;新&nbsp;增&nbsp;</button>
+					</div>
+					<table id="dataTable" data-toggle="table" data-url="$PathHelper.getLocalUrl()noticeUser/userDataList.action"
+						data-click-to-select="true" data-row-style="rowStyle"
+			           data-show-columns="true"
+			           data-detail-formatter="detailFormatter"
+			           data-pagination="true"
+			           data-id-field="id"
+			           data-page-list="[10, 25, 50, 100, ALL]"
+			           data-side-pagination="server"
+			           data-query-params="queryParams"
+					   >
+					   
+						<thead>
+							<tr>
+								<th data-field="stateCheck" data-checkbox="true"></th>
+								<th data-field="url">url地址</th>
+								<th data-field="type" data-formatter="noticeUserList.typeFormatter">访问类型</th>
+								<th data-field="state" data-formatter="noticeUserList.stateFormatter">状态</th>
+								<!-- <th data-field="updateUser">最后修改人</th>
+								<th data-field="updateTimeStr">最后修改时间</th> -->
+								#if($UserUtil.permissionBtn('userUpdatePage.shtml',$request))
+								<th data-field="action" data-formatter="noticeUserList.actionFormatter"
+									data-events="actionEvents">操作</th>
+								#end
+							</tr>
+						</thead>
+					</table>
+					</div>
+	
+	            </div>
+			   </div>
+	        </div>
+	    </div>
+	   </div>
+	</div>
+	</div>
+</div>
+
+<script src="$PathHelper.getLocalUrl()pages/noticeUser/js/notice-user-list.js"></script>

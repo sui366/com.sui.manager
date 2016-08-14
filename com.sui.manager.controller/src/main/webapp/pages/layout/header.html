@@ -1,0 +1,39 @@
+<nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">IDC监控系统</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" onclick="javascript:toBasePage();"><strong>IDC监控</strong></a>
+				
+				<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+            </div>
+                
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <!-- /.dropdown -->
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                                              您好 $!UserUtil.currentUserName() <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#" onclick="javascript:logOut();"><i class="fa fa-sign-out fa-fw"></i> 退出系统</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        
+        <script>
+        	function toBasePage(){
+        		window.location.href = pathHelper_localUrl+"homePage.shtml";
+        	}
+        	function logOut(){
+        		window.location.href = pathHelper_localUrl+"sysLogout.do";
+        	}
+        </script>

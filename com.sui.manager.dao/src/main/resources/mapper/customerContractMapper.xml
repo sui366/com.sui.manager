@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sui.manager.dao.CustomerContractDao" >
+  <resultMap id="BaseResultMap" type="com.sui.manager.common.entity.vo.CustomerContractVo" >
+	<id column="id" property="id" jdbcType="INTEGER" />
+	<result column="name" property="name" jdbcType="VARCHAR" />
+	<result column="sex" property="sex" jdbcType="VARCHAR" />
+	<result column="birthday" property="birthday" jdbcType="DATE" />
+	<result column="depart" property="depart" jdbcType="VARCHAR" />
+	<result column="job" property="job" jdbcType="VARCHAR" />
+	<result column="office_phone" property="officePhone" jdbcType="VARCHAR" />
+	<result column="phone" property="phone" jdbcType="VARCHAR" />
+	<result column="email" property="email" jdbcType="VARCHAR" />
+	<result column="qq" property="qq" jdbcType="VARCHAR" />
+	<result column="fax" property="fax" jdbcType="VARCHAR" />
+	<result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+	<result column="insert_user" property="insertUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="query" resultMap="BaseResultMap" parameterType="com.shunwang.business.framework.mybatis.query.ConditionQuery">
+		select t.*
+		from customer_contract t
+		<include refid="conditionQuery.core" />
+		order by
+		<choose>
+			<when test="paramMap.orderCol!=null">
+				${paramMap.orderCol}
+			</when>
+			<otherwise>
+				t.id
+			</otherwise>
+		</choose>
+		
+		<if test="paramMap.rp > 0">
+			limit #{paramMap.firstResult} , #{paramMap.rp}
+		</if>
+  </select>
+  <select id="queryCnt"
+		parameterType="com.shunwang.business.framework.mybatis.query.ConditionQuery"
+		resultType="java.lang.Integer">
+		select count(*) from customer_contract t
+		<include refid="conditionQuery.core" />
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from customer_contract
+    where 
+		id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="save" parameterType="com.sui.manager.common.entity.po.CustomerContract">
+	  	<selectKey resultType="int" keyProperty="id" >  
+			select LAST_INSERT_ID() as value  
+		</selectKey>  
+    insert into customer_contract (
+		name,
+		sex,
+		birthday,
+		depart,
+		job,
+		office_phone,
+		phone,
+		email,
+		qq,
+		fax,
+		insert_time,
+		insert_user
+	)
+    values (
+		#{name,jdbcType=VARCHAR},
+		#{sex,jdbcType=VARCHAR},
+		#{birthday,jdbcType=DATE},
+		#{depart,jdbcType=VARCHAR},
+		#{job,jdbcType=VARCHAR},
+		#{officePhone,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{qq,jdbcType=VARCHAR},
+		#{fax,jdbcType=VARCHAR},
+		now(),
+		#{insertUser,jdbcType=VARCHAR}
+    )
+  </insert>
+  <update id="update" parameterType="com.sui.manager.common.entity.po.CustomerContract" >
+    update customer_contract
+    set 
+		name = #{name,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=VARCHAR},
+		birthday = #{birthday,jdbcType=DATE},
+		depart = #{depart,jdbcType=VARCHAR},
+		job = #{job,jdbcType=VARCHAR},
+		office_phone = #{officePhone,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		email = #{email,jdbcType=VARCHAR},
+		qq = #{qq,jdbcType=VARCHAR},
+		fax = #{fax,jdbcType=VARCHAR},
+		insert_time = now(),
+		insert_user = #{insertUser,jdbcType=VARCHAR}
+    where 
+		id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    	id,
+		name,
+		sex,
+		birthday,
+		depart,
+		job,
+		office_phone,
+		phone,
+		email,
+		qq,
+		fax,
+		insert_time,
+		insert_user
+    from customer_contract
+    where 
+		id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

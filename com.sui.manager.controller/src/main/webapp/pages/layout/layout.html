@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" >
+    <title>IDC监控系统</title>
+    #parse("layout/static.html")  
+</head>
+
+<body>
+	<input type="hidden" id="pathHelper_localUrl" value="$!PathHelper.getLocalUrl()">
+	<input type="hidden" id="auth_url" value="$!UserUtil.authPath()">
+	<input type="hidden" id="currentUserName" value="$!UserUtil.currentUserName()">
+	
+    <div id="wrapper">
+        
+       #parse("layout/header.html")  
+       #parse("layout/leftMenu.html")  
+      
+	   $screen_content
+    </div>
+    <!-- /. WRAPPER  -->
+    
+	#parse("layout/footer.html")  
+
+</body>
+
+</html>
+
+<script>
+ var pathHelper_localUrl = $("#pathHelper_localUrl").val();
+</script>

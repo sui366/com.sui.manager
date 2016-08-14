@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<toolbox>
+	<tool>
+		<key>VelocityUtil</key>
+		<scope>application</scope>
+		<class>com.sui.manager.common.util.VelocityUtil</class>
+	</tool>
+	<tool>
+		<key>PathHelper</key>
+		<scope>application</scope>
+		<class>com.sui.manager.common.util.PathHelper</class>
+	</tool>
+</toolbox>

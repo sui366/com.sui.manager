@@ -1,0 +1,9 @@
+/* 选择器格式为：html #layui_layer_skin文件夹名stylecss，这一点非常重要 */
+html #layui_layer_skinbaseLayerstylecss{display:none; position: absolute; width:1989px;}
+
+body .layer-ext-baseLayer .layui-layer-title{
+    background-color: #ff931a;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+}

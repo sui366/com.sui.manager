@@ -1,0 +1,146 @@
+<link href="$PathHelper.getStaticUrl()common/bootsrap-validator/bootstrapValidator.min.css" rel="stylesheet" />
+
+<div id="page-wrapper">
+	<div class="header">
+		<ol class="breadcrumb">
+<!-- 			<li><a href="#">Home</a></li> -->
+<!-- 			<li><a href="#">定时任务监控</a></li> -->
+<!-- 			<li class="active">定时任务更新</li> -->
+		</ol>
+
+	</div>
+
+	<div id="page-inner">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">#if($!result.data.obj) 更新客户信息 #else 新增客户信息#end</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-8">
+								<form class="form-horizontal" role="form" id="subDataForm" name="subDataForm">
+									<input type="hidden" id="id" name="id" value="$!result.data.obj.id">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">客户名称</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="name" name="name" value="$!result.data.obj.name" maxlength="100">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">关键字</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="keyWord" name="keyWord" value="$!result.data.obj.keyWord" maxlength="50">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">邮政编码</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="code" name="code" value="$!result.data.obj.code" maxlength="100">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">国家</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="country" name="country" value="$!result.data.obj.country" maxlength="10">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">省份</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="province" name="province" value="$!result.data.obj.province" maxlength="100">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">城市</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="city" name="city" value="$!result.data.obj.city" maxlength="100">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">下次联系时间</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="connectTime" name="connectTime" value="$!result.data.obj.connectTimeStr" onclick="javascript:WdatePicker({dateFmt:'yyyy-MM-dd'});" maxlength="100">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">最后联系日期</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="lastConnectTime" name="lastConnectTime" value="$!result.data.obj.lastConnectTimeStr" onclick="javascript:WdatePicker({dateFmt:'yyyy-MM-dd'});" maxlength="100">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">状态</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="status" name="status" value="$!result.data.obj.status" maxlength="100">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">客户等级</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="level" name="level" value="$!result.data.obj.level" maxlength="50">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">积分</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="point" name="point" value="$!result.data.obj.point" maxlength="10">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">类型</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="type" name="type" value="$!result.data.obj.type" maxlength="50">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">客户来源</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="source" name="source" value="$!result.data.obj.source" maxlength="50">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">行业类型</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="tradeType" name="tradeType" value="$!result.data.obj.tradeType" maxlength="50">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">区域</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="area" name="area" value="$!result.data.obj.area" maxlength="50">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">信用等级</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="creditLevel" name="creditLevel" value="$!result.data.obj.creditLevel" maxlength="50">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">详细地址</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="addr" name="addr" value="$!result.data.obj.addr" maxlength="250">
+										</div> 
+									</div><div class="form-group">
+										<label class="col-sm-2 control-label">公司主页</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="url" name="url" value="$!result.data.obj.url" maxlength="250">
+										</div> 
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-2 control-label">备注</label>
+										<div class="col-xs-10">
+											<textarea class="form-control" id="remark" name="remark" rows="4">$!result.data.obj.remark</textarea>
+										</div>
+									</div>
+									
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label"></label>
+										<div class="col-sm-4">
+											<button type="button" class="btn btn-default" id="subBtn">提交</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- /.row (nested) -->
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+	</div>
+	<!-- /. PAGE INNER  -->
+</div>
+
+<script src="$PathHelper.getLocalUrl()pages/customer/js/info-update.js"></script>
+<script src="$PathHelper.getLocalUrl()common/bootsrap-validator/bootstrapValidator.min.js"></script>
+<script src="$PathHelper.getLocalUrl()common/My97DatePicker/WdatePicker.js"></script>

@@ -1,0 +1,14 @@
+#set($layout = "layout/twoWaySelLayout.html")
+	<div class="col-md-7">
+		<select multiple="multiple" size="10" name="duallistbox_demo1" class="demo1">
+			#foreach($user in $!result.getDataList())
+                <option value=$user.getUserName()>$user.getUserName()</option>
+            #end
+		</select>
+		<br />
+	<input id="showValue" type="button" value="show selected data" />
+		</div>
+		
+		
+<script src="$PathHelper.getLocalUrl()pages/noticeUser/js/two-way-selWindow.js"></script>		
+

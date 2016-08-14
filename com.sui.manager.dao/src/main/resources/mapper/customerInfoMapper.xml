@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sui.manager.dao.CustomerInfoDao" >
+  <resultMap id="BaseResultMap" type="com.sui.manager.common.entity.vo.CustomerInfoVo" >
+	<id column="id" property="id" jdbcType="INTEGER" />
+	<result column="key_word" property="keyWord" jdbcType="VARCHAR" />
+	<result column="name" property="name" jdbcType="VARCHAR" />
+	<result column="code" property="code" jdbcType="VARCHAR" />
+	<result column="country" property="country" jdbcType="VARCHAR" />
+	<result column="province" property="province" jdbcType="VARCHAR" />
+	<result column="city" property="city" jdbcType="VARCHAR" />
+	<result column="insert_user" property="insertUser" jdbcType="VARCHAR" />
+	<result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+	<result column="connect_time" property="connectTime" jdbcType="TIMESTAMP" />
+	<result column="last_connect_time" property="lastConnectTime" jdbcType="TIMESTAMP" />
+	<result column="url" property="url" jdbcType="VARCHAR" />
+	<result column="point" property="point" jdbcType="INTEGER" />
+	<result column="level" property="level" jdbcType="VARCHAR" />
+	<result column="status" property="status" jdbcType="VARCHAR" />
+	<result column="type" property="type" jdbcType="VARCHAR" />
+	<result column="source" property="source" jdbcType="VARCHAR" />
+	<result column="trade_type" property="tradeType" jdbcType="VARCHAR" />
+	<result column="area" property="area" jdbcType="VARCHAR" />
+	<result column="credit_level" property="creditLevel" jdbcType="VARCHAR" />
+	<result column="remark" property="remark" jdbcType="VARCHAR" />
+	<result column="addr" property="addr" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="query" resultMap="BaseResultMap" parameterType="com.shunwang.business.framework.mybatis.query.ConditionQuery">
+		select t.*
+		from customer_info t
+		<include refid="conditionQuery.core" />
+		order by
+		<choose>
+			<when test="paramMap.orderCol!=null">
+				${paramMap.orderCol}
+			</when>
+			<otherwise>
+				t.id
+			</otherwise>
+		</choose>
+		
+		<if test="paramMap.rp > 0">
+			limit #{paramMap.firstResult} , #{paramMap.rp}
+		</if>
+  </select>
+  <select id="queryCnt"
+		parameterType="com.shunwang.business.framework.mybatis.query.ConditionQuery"
+		resultType="java.lang.Integer">
+		select count(*) from customer_info t
+		<include refid="conditionQuery.core" />
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from customer_info
+    where 
+		id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="save" parameterType="com.sui.manager.common.entity.po.CustomerInfo">
+	  	<selectKey resultType="int" keyProperty="id" >  
+			select LAST_INSERT_ID() as value  
+		</selectKey>  
+    insert into customer_info (
+		key_word,
+		name,
+		code,
+		country,
+		province,
+		city,
+		addr,
+		insert_user,
+		insert_time,
+		connect_time,
+		last_connect_time,
+		url,
+		point,
+		level,
+		status,
+		type,
+		source,
+		trade_type,
+		area,
+		credit_level,
+		remark
+	)
+    values (
+		#{keyWord,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{code,jdbcType=VARCHAR},
+		#{country,jdbcType=VARCHAR},
+		#{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
+		#{addr,jdbcType=VARCHAR},
+		#{insertUser,jdbcType=VARCHAR},
+		now(),
+		#{connectTime,jdbcType=TIMESTAMP},
+		#{lastConnectTime,jdbcType=TIMESTAMP},
+		#{url,jdbcType=VARCHAR},
+		#{point,jdbcType=INTEGER},
+		#{level,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
+		#{source,jdbcType=VARCHAR},
+		#{tradeType,jdbcType=VARCHAR},
+		#{area,jdbcType=VARCHAR},
+		#{creditLevel,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}
+    )
+  </insert>
+  <update id="update" parameterType="com.sui.manager.common.entity.po.CustomerInfo" >
+    update customer_info
+    set 
+		key_word = #{keyWord,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		code = #{code,jdbcType=VARCHAR},
+		country = #{country,jdbcType=VARCHAR},
+		province = #{province,jdbcType=VARCHAR},
+		city = #{city,jdbcType=VARCHAR},
+		addr = #{addr,jdbcType=VARCHAR},
+		insert_user = #{insertUser,jdbcType=VARCHAR},
+		insert_time = now(),
+		connect_time = #{connectTime,jdbcType=TIMESTAMP},
+		last_connect_time = #{lastConnectTime,jdbcType=TIMESTAMP},
+		url = #{url,jdbcType=VARCHAR},
+		point = #{point,jdbcType=INTEGER},
+		level = #{level,jdbcType=VARCHAR},
+		status = #{status,jdbcType=VARCHAR},
+		type = #{type,jdbcType=VARCHAR},
+		source = #{source,jdbcType=VARCHAR},
+		trade_type = #{tradeType,jdbcType=VARCHAR},
+		area = #{area,jdbcType=VARCHAR},
+		credit_level = #{creditLevel,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR}
+    where 
+		id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id,
+		key_word,
+		name,
+		code,
+		country,
+		province,
+		city,
+		addr,
+		insert_user,
+		insert_time,
+		connect_time,
+		last_connect_time,
+		url,
+		point,
+		level,
+		status,
+		type,
+		source,
+		trade_type,
+		area,
+		credit_level,
+		remark
+    from customer_info
+    where 
+		id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

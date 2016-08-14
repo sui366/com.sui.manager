@@ -1,0 +1,89 @@
+<link href="$PathHelper.getStaticUrl()common/bootsrap-validator/bootstrapValidator.min.css" rel="stylesheet" />
+
+<div id="page-wrapper">
+	<div class="header">
+		<ol class="breadcrumb">
+<!-- 			<li><a href="#">Home</a></li> -->
+<!-- 			<li><a href="#">定时任务监控</a></li> -->
+<!-- 			<li class="active">定时任务更新</li> -->
+		</ol>
+
+	</div>
+
+	<div id="page-inner">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">#if($!result.data.obj) 更新系统用户 #else 新增系统用户#end</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-8">
+								<form class="form-horizontal" role="form" id="subDataForm" name="subDataForm">
+									<input type="hidden" id="id" name="id" value="$!result.data.obj.id">
+<!-- 									<input type="hidden" id="sendType" name="sendType" value="$!result.data.obj.sendType"> -->
+<!-- 									<input type="hidden" id="type" value="$!result.data.obj.type"> -->
+<!-- 									<input type="hidden" id="status" value="$!result.data.obj.status"> -->
+<!-- 									<input type="hidden" id="hour" name="hour" value="$!result.data.obj.hour"> -->
+<!-- 									<input type="hidden" id="minute" name="minute" value="$!result.data.obj.minute"> -->
+<!-- 									<input type="hidden" id="second" name="second" value="$!result.data.obj.second"> -->
+									<div class="form-group">
+										<label class="col-sm-2 control-label">用户名</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="name" name="name" value="$!result.data.obj.name" maxlength="50">
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">部门</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="dept" name="dept" value="$!result.data.obj.dept" maxlength="50">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">办公电话</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="officePhone" name="officePhone" value="$!result.data.obj.officePhone" maxlength="20">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">手机</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="mobilePhone" name="mobilePhone" value="$!result.data.obj.mobilePhone" maxlength="20">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">邮箱</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="email" name="email" value="$!result.data.obj.email" maxlength="100">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">备注</label>
+										<div class="col-xs-10">
+											<textarea class="form-control" id="remark" name="remark" rows="4">$!result.data.obj.remark</textarea>
+										</div>
+									</div>
+									
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label"></label>
+										<div class="col-sm-4">
+											<button type="button" class="btn btn-default" id="subBtn">提交</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- /.row (nested) -->
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+	</div>
+	<!-- /. PAGE INNER  -->
+</div>
+
+<script src="$PathHelper.getLocalUrl()pages/sysUser/js/sys-user-update.js"></script>
+<script src="$PathHelper.getLocalUrl()common/bootsrap-validator/bootstrapValidator.min.js"></script>

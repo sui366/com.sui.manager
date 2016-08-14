@@ -1,0 +1,66 @@
+ <!--/. NAV TOP  -->
+        <input type="hidden" id="activeLi" value="$!session.getAttribute('activeLi')">
+        <input type="hidden" id="activeMenu" value="$!session.getAttribute('activeMenu')">
+        <input type="hidden" id="momitor_menu_names" value="$!session.getAttribute('momitor_menu_names')">
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    
+                    <li id="systemLi" >
+                        <a href="#">系统配置<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                        	<li >
+                                <a id="sysUserList" href="$PathHelper.getLocalUrl()sysUser/list.shtml?activeLi=systemLi&activeMenu=sysUserList"><i></i> 系统用户</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li id="customerLi" >
+                        <a href="#">客户管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                        	<li >
+                                <a id="customerInfoList" href="$PathHelper.getLocalUrl()customer/info/list.shtml?activeLi=customerLi&activeMenu=customerInfoList"><i></i>客户信息</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    
+                </ul>
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        
+<script>
+
+    var activeLi = $("#activeLi").val();
+    var activeMenu = $("#activeMenu").val();
+    
+    $(".navbar-side").find("li").removeClass("active");
+    if(isDataNull(activeLi)){
+	    if(activeLi.indexOf("_")>0){
+	    	var lis = activeLi.split("_");
+	    	for(var index in lis){
+	        	$(".navbar-side").find("#"+lis[index]).addClass("active");
+	    	}
+	    }
+	    else{
+	    	$(".navbar-side").find("#"+activeLi).addClass("active");
+	    }
+    }
+    
+//     $(".navbar-side").find("a").removeClass("active-menu");
+//     if(isDataNull(activeMenu)){
+// 	    $(".navbar-side").find("#"+activeMenu).addClass("active-menu");
+//     }
+//     else{//默认展开网维第一个节点
+//     	window.location.href=$("#dataicafe li:first a").attr("href");
+//     }
+    
+    //激活当前节点
+    function activeCurrentNode(){
+    	window.location.href=$(".navbar-side .active-menu").attr("href");
+    }
+    
+    
+</script>
