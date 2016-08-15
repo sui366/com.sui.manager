@@ -25,7 +25,7 @@ import com.sui.manager.service.CustomerContractService;
 
 @Controller
 public class CustomerContractController extends CrudController<CustomerContract, CustomerContractService> {
-	
+
 	private Logger logger = Logger.getLogger(getClass());
 
 	/**
@@ -75,70 +75,71 @@ public class CustomerContractController extends CrudController<CustomerContract,
 
 		return map;
 	}
-	
+
 	/**
 	 * 跳到更新页面
 	 */
 	@RequestMapping("/customer/contract/updatePage.shtml")
-	public ModelAndView updatePage(CustomerContractQo query, HttpServletRequest request) throws Exception{
+	public ModelAndView updatePage(CustomerContractQo query, HttpServletRequest request) throws Exception {
 		Result result = new Result();
-		
-		if(query.getId() != null){
-			
+
+		if (query.getId() != null) {
+
 			CustomerContract po = bo.get(query.getId());
 			CustomerContractVo vo = new CustomerContractVo();
 			BeanUtils.copyProperties(vo, po);
 			result.setValue("obj", vo);
 		}
-		
+
 		return new ModelAndView("customer/contract-update").addObject("result", result);
 	}
-	
+
 	/**
 	 * 更新操作
 	 */
 	@RequestMapping("/customer/contract/update")
 	@ResponseBody
-	public Result update(CustomerContract po, HttpServletRequest request) throws Exception{
+	public Result update(CustomerContract po, HttpServletRequest request) throws Exception {
 		Result result = new Result();
-		
+
 		CustomerContractQo qo = new CustomerContractQo();
-		
-		if(po.getId() != null){
+
+		if (po.getId() != null) {
 			bo.update(po);
-		}else{
+		} else {
 			bo.save(po);
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * 删除操作
 	 */
 	@RequestMapping("/customer/contract/delete")
 	@ResponseBody
-	public Result monitorConfigDelete(CustomerContractQo qo, HttpServletRequest request)  throws Exception{
+	public Result monitorConfigDelete(CustomerContractQo qo, HttpServletRequest request) throws Exception {
 		Result result = new Result();
-		
-		if(null == qo.getId()){
+
+		if (null == qo.getId()) {
 			result.setFailureMsg("", "请选择要删除的数据");
 			return result;
 		}
-		
+
 		CustomerContract po = bo.get(qo.getId());
-		if(null == po){
+		if (null == po) {
 			result.setFailureMsg("", "删除的数据不存在");
 			return result;
 		}
-		
+
 		try {
 			bo.delete(qo.getId());
 		} catch (Exception e) {
 			logger.error("删除程序类型数据异常", e);
 			result.setFailureMsg("", "删除程序类型数据异常");
 		}
-		
+
 		return result;
 	}
+
 }

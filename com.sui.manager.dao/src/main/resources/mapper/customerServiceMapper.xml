@@ -15,7 +15,7 @@
 	<result column="solvers" property="solvers" jdbcType="VARCHAR" />
 	<result column="grade" property="grade" jdbcType="VARCHAR" />
 	<result column="content" property="content" jdbcType="VARCHAR" />
-	<result column=" result" property=" result" jdbcType="VARCHAR" />
+	<result column="result" property=" result" jdbcType="VARCHAR" />
 	<result column="insert_user" property="insertUser" jdbcType="VARCHAR" />
 	<result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
   </resultMap>

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.shunwang.business.framework.mybatis.query.condition.Condition;
 import com.shunwang.business.framework.pojo.Page;
 import com.sui.manager.common.business.Result;
+import com.sui.manager.common.constant.Constants;
 import com.sui.manager.common.entity.po.CustomerInfo;
 import com.sui.manager.common.entity.qo.CustomerInfoQo;
 import com.sui.manager.common.entity.vo.CustomerInfoVo;
@@ -95,6 +96,8 @@ public class CustomerInfoController extends BaseController<CustomerInfo, Custome
 			BeanUtils.copyProperties(vo, po);
 			result.setValue("obj", vo);
 		}
+		
+		result.setValue("customerStatus", Constants.CONSTANTSMAP.get(Constants.CUSTOMER_INFO_STATUS));
 		
 		return new ModelAndView("customer/info-update").addObject("result", result);
 	}

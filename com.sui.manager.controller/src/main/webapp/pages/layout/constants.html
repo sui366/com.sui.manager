@@ -1,0 +1,52 @@
+<div id="page-wrapper">
+	<div class="header">
+		<ol class="breadcrumb">
+<!-- 			<li><a href="#">Home</a></li> -->
+		</ol>
+
+	</div>
+
+	<div id="page-inner">
+		<div class="panel panel-default">
+		<div class="row">
+	       <div class="col-md-12">
+	           <!-- Advanced Tables -->
+	           <div class="panel panel-default">
+	               <div class="panel-heading">
+	                                  重新加载系统参数
+	               </div>
+	               <div class="panel-body">
+	                <div class="table-responsive">
+	
+					<div class="container">
+					   <button id="addNew" type="button" class="btn btn-default" onclick="javascript:load();">&nbsp;重新加载&nbsp;</button>
+					</div>
+	            </div>
+			   </div>
+	        </div>
+	    </div>
+	   </div>
+	</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+function load(){
+	var windowIndex = layer.load();
+	$.ajax({
+		type : "post",
+		url : pathHelper_localUrl+"homePage/loadConstant.action",
+		complete:function(){
+			layer.close(windowIndex);
+		},
+		success : function(result) {
+			if(result.success){
+				layer.alert("重新加载系统参数完毕！");
+			}else{
+				layer.alert(result.message);
+			}
+		}
+	});
+}
+
+</script>

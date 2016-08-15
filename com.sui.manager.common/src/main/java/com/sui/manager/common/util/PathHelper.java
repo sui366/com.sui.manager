@@ -25,4 +25,9 @@ public final class PathHelper {
 //		return PropertiesUtil.getProperty("static.url");
 	}
 	
+	public static String getExcelName() {
+		return PropertiesUtil.getProperty("excel.name");
+	}
+	
+	
 }

@@ -29,4 +29,6 @@
 	
 	<bean id="SpringApplicationContext" class="com.sui.manager.common.util.ApplicationContextHelper"></bean>
 	
+	<bean id="readExcelUtils" class="com.sui.manager.common.util.excel.ReadExcelUtils" init-method="buildConstants" lazy-init="true"></bean>
+	
 </beans> 
