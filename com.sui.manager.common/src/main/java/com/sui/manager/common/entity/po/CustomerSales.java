@@ -1,8 +1,9 @@
 package com.sui.manager.common.entity.po;
 
-import com.shunwang.business.framework.pojo.BasePojo;
-import java.sql.Timestamp;
 import java.sql.Date;
+import java.sql.Timestamp;
+
+import com.shunwang.business.framework.pojo.BasePojo;
 
 public class CustomerSales extends BasePojo {
 	/**
@@ -14,8 +15,8 @@ public class CustomerSales extends BasePojo {
 	private String goodVersion;
 	private Date saleDate;
 	private Integer customerId;
-	private Integer takeUserId;
-	private Integer signUserId;
+	private Integer takeUserName;
+	private Integer signUserName;
 	private String goodNumber;
 	private Date signDate;
 	private Date sendDate;
@@ -56,20 +57,6 @@ public class CustomerSales extends BasePojo {
 
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
-	}
-	public Integer getTakeUserId() {
-		return takeUserId;
-	}
-
-	public void setTakeUserId(Integer takeUserId) {
-		this.takeUserId = takeUserId;
-	}
-	public Integer getSignUserId() {
-		return signUserId;
-	}
-
-	public void setSignUserId(Integer signUserId) {
-		this.signUserId = signUserId;
 	}
 	public String getGoodNumber() {
 		return goodNumber;
@@ -156,28 +143,21 @@ public class CustomerSales extends BasePojo {
 		this.remark = remark;
 	}
 
-	@Override
-	public String toString() {
-		return "CustomerSales "+ 
-				"[id=" + id +
-				", goodVersion=" + goodVersion + 
-				", saleDate=" + saleDate + 
-				", customerId=" + customerId + 
-				", takeUserId=" + takeUserId + 
-				", signUserId=" + signUserId + 
-				", goodNumber=" + goodNumber + 
-				", signDate=" + signDate + 
-				", sendDate=" + sendDate + 
-				", passNumber=" + passNumber + 
-				", code=" + code + 
-				", pageNumber=" + pageNumber + 
-				", isBill=" + isBill + 
-				", preMoney=" + preMoney + 
-				", reciveMoney=" + reciveMoney + 
-				", insertTime=" + insertTime + 
-				", insertUser=" + insertUser + 
-				", remark=" + remark + 
-		"]";
+	public Integer getTakeUserName() {
+		return takeUserName;
 	}
+
+	public void setTakeUserName(Integer takeUserName) {
+		this.takeUserName = takeUserName;
+	}
+
+	public Integer getSignUserName() {
+		return signUserName;
+	}
+
+	public void setSignUserName(Integer signUserName) {
+		this.signUserName = signUserName;
+	}
+
 
 }

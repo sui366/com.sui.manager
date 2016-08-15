@@ -18,6 +18,7 @@ import com.shunwang.business.framework.mybatis.query.condition.Condition;
 import com.shunwang.business.framework.pojo.Page;
 import com.shunwang.business.framework.spring.mvc.controller.CrudController;
 import com.sui.manager.common.business.Result;
+import com.sui.manager.common.constant.Constants;
 import com.sui.manager.common.entity.po.CustomerContract;
 import com.sui.manager.common.entity.qo.CustomerContractQo;
 import com.sui.manager.common.entity.vo.CustomerContractVo;
@@ -90,6 +91,8 @@ public class CustomerContractController extends CrudController<CustomerContract,
 			BeanUtils.copyProperties(vo, po);
 			result.setValue("obj", vo);
 		}
+		
+		result.setValue("contractSex", Constants.CONSTANTSMAP.get(Constants.SEX));
 
 		return new ModelAndView("customer/contract-update").addObject("result", result);
 	}

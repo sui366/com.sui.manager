@@ -1,8 +1,9 @@
 package com.sui.manager.common.entity.po;
 
-import com.shunwang.business.framework.pojo.BasePojo;
 import java.sql.Timestamp;
-import java.sql.Date;
+import java.util.Date;
+
+import com.shunwang.business.framework.pojo.BasePojo;
 
 public class CustomerContract extends BasePojo {
 	/**

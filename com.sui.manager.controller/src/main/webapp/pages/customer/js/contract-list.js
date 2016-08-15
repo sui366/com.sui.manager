@@ -4,10 +4,10 @@ function PageList() {
 PageList.prototype = {
 	
 	toInertPage:function(){
-		window.location.href= pathHelper_localUrl+"customer/info/updatePage.shtml?t="+new Date().getTime();
+		window.location.href= pathHelper_localUrl+"customer/contract/updatePage.shtml?t="+new Date().getTime();
 	},
 	toUpdatePage:function(id){
-		window.location.href= pathHelper_localUrl+"customer/info/updatePage.shtml?t="+new Date().getTime()+"&id="+id;
+		window.location.href= pathHelper_localUrl+"customer/contract/updatePage.shtml?t="+new Date().getTime()+"&id="+id;
 	},
 	
 	deleteObj:function(id){
@@ -22,14 +22,14 @@ PageList.prototype = {
 			var index = layer.load();
 			$.ajax({
 				type : "post",
-				url : pathHelper_localUrl+"customer/info/delete.action",
+				url : pathHelper_localUrl+"customer/contract/delete.action",
 				data : {"id":id},
 				complete:function(){
 					layer.close(index);
 				},
 				success : function(result) {
 					if(result.success){
-						window.location.href= pathHelper_localUrl+"customer/info/list.shtml";
+						window.location.href= pathHelper_localUrl+"customer/contract/list.shtml";
 					}else{
 						layer.alert(result.message);
 					}

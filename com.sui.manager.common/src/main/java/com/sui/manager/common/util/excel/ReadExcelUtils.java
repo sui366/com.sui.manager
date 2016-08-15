@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -27,31 +25,12 @@ import com.sui.manager.common.util.PathHelper;
  * 
  */
 public class ReadExcelUtils {
-	private Workbook wb;
-	private Sheet sheet;
-	private Row row;
+//	private Workbook wb;
+//	private Sheet sheet;
+//	private Row row;
 
 	public ReadExcelUtils() {
-		String filepath = System.getProperty("MANAGER_CONFIG_HOME");
-		if (filepath == null) {
-			return;
-		}
-		filepath = filepath + File.separator + PathHelper.getExcelName();
-		String ext = filepath.substring(filepath.lastIndexOf("."));
-		try {
-			InputStream is = new FileInputStream(filepath);
-			if (".xls".equals(ext)) {
-				wb = new HSSFWorkbook(is);
-			} else if (".xlsx".equals(ext)) {
-				wb = new XSSFWorkbook(is);
-			} else {
-				wb = null;
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 	}
 
 	/**
@@ -61,22 +40,22 @@ public class ReadExcelUtils {
 	 * @return String 表头内容的数组
 	 * 
 	 */
-	public String[] readExcelTitle() throws Exception {
-		if (wb == null) {
-			throw new Exception("Workbook对象为空！");
-		}
-		sheet = wb.getSheetAt(0);
-		row = sheet.getRow(0);
-		// 标题总列数
-		int colNum = row.getPhysicalNumberOfCells();
-		System.out.println("colNum:" + colNum);
-		String[] title = new String[colNum];
-		for (int i = 0; i < colNum; i++) {
-			// title[i] = getStringCellValue(row.getCell((short) i));
-			title[i] = row.getCell(i).getCellFormula();
-		}
-		return title;
-	}
+//	public String[] readExcelTitle() throws Exception {
+//		if (wb == null) {
+//			throw new Exception("Workbook对象为空！");
+//		}
+//		sheet = wb.getSheetAt(0);
+//		row = sheet.getRow(0);
+//		// 标题总列数
+//		int colNum = row.getPhysicalNumberOfCells();
+//		System.out.println("colNum:" + colNum);
+//		String[] title = new String[colNum];
+//		for (int i = 0; i < colNum; i++) {
+//			// title[i] = getStringCellValue(row.getCell((short) i));
+//			title[i] = row.getCell(i).getCellFormula();
+//		}
+//		return title;
+//	}
 
 	/**
 	 * 读取Excel数据内容
@@ -85,32 +64,32 @@ public class ReadExcelUtils {
 	 * @return Map 包含单元格数据内容的Map对象
 	 * 
 	 */
-	public Map<Integer, Map<Integer, Object>> readExcelContent() throws Exception {
-		if (wb == null) {
-			throw new Exception("Workbook对象为空！");
-		}
-		Map<Integer, Map<Integer, Object>> content = new HashMap<Integer, Map<Integer, Object>>();
-
-		sheet = wb.getSheetAt(0);
-
-		// 得到总行数
-		int rowNum = sheet.getLastRowNum();
-		row = sheet.getRow(0);
-		int colNum = row.getPhysicalNumberOfCells();
-		// 正文内容应该从第二行开始,第一行为表头的标题
-		for (int i = 1; i <= rowNum; i++) {
-			row = sheet.getRow(i);
-			int j = 0;
-			Map<Integer, Object> cellValue = new HashMap<Integer, Object>();
-			while (j < colNum) {
-				Object obj = getCellFormatValue(row.getCell(j));
-				cellValue.put(j, obj);
-				j++;
-			}
-			content.put(i, cellValue);
-		}
-		return content;
-	}
+//	public Map<Integer, Map<Integer, Object>> readExcelContent() throws Exception {
+//		if (wb == null) {
+//			throw new Exception("Workbook对象为空！");
+//		}
+//		Map<Integer, Map<Integer, Object>> content = new HashMap<Integer, Map<Integer, Object>>();
+//
+//		sheet = wb.getSheetAt(0);
+//
+//		// 得到总行数
+//		int rowNum = sheet.getLastRowNum();
+//		row = sheet.getRow(0);
+//		int colNum = row.getPhysicalNumberOfCells();
+//		// 正文内容应该从第二行开始,第一行为表头的标题
+//		for (int i = 1; i <= rowNum; i++) {
+//			row = sheet.getRow(i);
+//			int j = 0;
+//			Map<Integer, Object> cellValue = new HashMap<Integer, Object>();
+//			while (j < colNum) {
+//				Object obj = getCellFormatValue(row.getCell(j));
+//				cellValue.put(j, obj);
+//				j++;
+//			}
+//			content.put(i, cellValue);
+//		}
+//		return content;
+//	}
 
 	/**
 	 * 
@@ -156,7 +135,32 @@ public class ReadExcelUtils {
 	}
 
 	private List<Object> readCol(int col) throws Exception{
-		Sheet sheet = wb.getSheetAt(0);
+		
+		Workbook wb = null;
+		Sheet sheet = null;
+		
+		String filepath = System.getProperty("MANAGER_CONFIG_HOME");
+		if (filepath == null) {
+			return null;
+		}
+		filepath = filepath + File.separator + PathHelper.getExcelName();
+		String ext = filepath.substring(filepath.lastIndexOf("."));
+		try {
+			InputStream is = new FileInputStream(filepath);
+			if (".xls".equals(ext)) {
+				wb = new HSSFWorkbook(is);
+			} else if (".xlsx".equals(ext)) {
+				wb = new XSSFWorkbook(is);
+			} else {
+				wb = null;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		sheet = wb.getSheetAt(0);
 		Row rows = null;
 		Cell cell = null;
 		List<Object> objList = new ArrayList<Object>();
@@ -168,13 +172,16 @@ public class ReadExcelUtils {
 				}
 				cell = rows.getCell(col);
 				if (cell == null) {
-					continue;
+					break;
 				}
 				objList.add(getCellFormatValue(cell));
 			} catch (Exception e) {
 				throw new Exception(e);
 			}
 		}
+		
+		wb.close();
+		
 		return objList;
 	}
 	
@@ -186,6 +193,7 @@ public class ReadExcelUtils {
 			Constants.CONSTANTSMAP.put(Constants.CUSTOMER_INFO_TRADE_TYPE, readCol(3));
 			Constants.CONSTANTSMAP.put(Constants.CUSTOMER_INFO_CREDIT_LEVEL, readCol(4));
 			Constants.CONSTANTSMAP.put(Constants.CUSTOMER_INFO_SOURCE, readCol(5));
+			Constants.CONSTANTSMAP.put(Constants.SEX, readCol(6));
 		} catch (Exception e) {
 			throw new Exception(e);
 		}

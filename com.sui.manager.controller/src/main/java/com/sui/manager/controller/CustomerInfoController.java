@@ -98,6 +98,11 @@ public class CustomerInfoController extends BaseController<CustomerInfo, Custome
 		}
 		
 		result.setValue("customerStatus", Constants.CONSTANTSMAP.get(Constants.CUSTOMER_INFO_STATUS));
+		result.setValue("customerCreditLevel", Constants.CONSTANTSMAP.get(Constants.CUSTOMER_INFO_CREDIT_LEVEL));
+		result.setValue("customerLevel", Constants.CONSTANTSMAP.get(Constants.CUSTOMER_INFO_LEVEL));
+		result.setValue("customerSource", Constants.CONSTANTSMAP.get(Constants.CUSTOMER_INFO_SOURCE));
+		result.setValue("customerTradeType", Constants.CONSTANTSMAP.get(Constants.CUSTOMER_INFO_TRADE_TYPE));
+		result.setValue("customerType", Constants.CONSTANTSMAP.get(Constants.CUSTOMER_INFO_TYPE));
 		
 		return new ModelAndView("customer/info-update").addObject("result", result);
 	}

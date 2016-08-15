@@ -6,8 +6,8 @@
 	<result column="good_version" property="goodVersion" jdbcType="VARCHAR" />
 	<result column="sale_date" property="saleDate" jdbcType="DATE" />
 	<result column="customer_id" property="customerId" jdbcType="INTEGER" />
-	<result column="take_user_id" property="takeUserId" jdbcType="INTEGER" />
-	<result column="sign_user_id" property="signUserId" jdbcType="INTEGER" />
+	<result column="take_user_name" property="takeUserName" jdbcType="VARCHAR" />
+	<result column="sign_user_name" property="signUserName" jdbcType="VARCHAR" />
 	<result column="good_number" property="goodNumber" jdbcType="VARCHAR" />
 	<result column="sign_date" property="signDate" jdbcType="DATE" />
 	<result column="send_date" property="sendDate" jdbcType="DATE" />
@@ -58,8 +58,8 @@
 		good_version,
 		sale_date,
 		customer_id,
-		take_user_id,
-		sign_user_id,
+		take_user_name,
+		sign_user_name,
 		good_number,
 		sign_date,
 		send_date,
@@ -77,8 +77,8 @@
 		#{goodVersion,jdbcType=VARCHAR},
 		#{saleDate,jdbcType=DATE},
 		#{customerId,jdbcType=INTEGER},
-		#{takeUserId,jdbcType=INTEGER},
-		#{signUserId,jdbcType=INTEGER},
+		#{takeUserName,jdbcType=VARCHAR},
+		#{signUserName,jdbcType=VARCHAR},
 		#{goodNumber,jdbcType=VARCHAR},
 		#{signDate,jdbcType=DATE},
 		#{sendDate,jdbcType=DATE},
@@ -99,8 +99,8 @@
 		good_version = #{goodVersion,jdbcType=VARCHAR},
 		sale_date = #{saleDate,jdbcType=DATE},
 		customer_id = #{customerId,jdbcType=INTEGER},
-		take_user_id = #{takeUserId,jdbcType=INTEGER},
-		sign_user_id = #{signUserId,jdbcType=INTEGER},
+		take_user_name = #{takeUserName,jdbcType=VARCHAR},
+		sign_user_name = #{signUserName,jdbcType=VARCHAR},
 		good_number = #{goodNumber,jdbcType=VARCHAR},
 		sign_date = #{signDate,jdbcType=DATE},
 		send_date = #{sendDate,jdbcType=DATE},
@@ -121,8 +121,8 @@
 		good_version,
 		sale_date,
 		customer_id,
-		take_user_id,
-		sign_user_id,
+		take_user_name,
+		sign_user_name,
 		good_number,
 		sign_date,
 		send_date,
