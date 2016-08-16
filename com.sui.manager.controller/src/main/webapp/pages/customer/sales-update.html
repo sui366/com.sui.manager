@@ -1,4 +1,5 @@
 <link href="$PathHelper.getStaticUrl()common/bootsrap-validator/bootstrapValidator.min.css" rel="stylesheet" />
+<link href="$PathHelper.getStaticUrl()common/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
 
 <div id="page-wrapper">
 	<div class="header">
@@ -14,78 +15,115 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">#if($!result.data.obj) 更新客户联系人信息 #else 新增客户联系人信息#end</div>
+					<div class="panel-heading">#if($!result.data.obj) 更新销售记录 #else 新增销售记录#end</div>
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-8">
 								<form class="form-horizontal" role="form" id="subDataForm" name="subDataForm">
 									<input type="hidden" id="id" name="id" value="$!result.data.obj.id">
+									<input type="hidden" id="isbillHid" value="$!result.data.obj.isBill">
 									<div class="form-group">
-										<label class="col-sm-2 control-label">姓名</label>
+										<label class="col-sm-2 control-label">商品型号</label>
 										<div class="col-sm-10">
-											<input class="form-control" id="name" name="name" value="$!result.data.obj.name" maxlength="50">
+											<input class="form-control" id="goodVersion" name="goodVersion" value="$!result.data.obj.goodVersion" maxlength="100">
 										</div> 
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">性别</label>
+										<label class="col-sm-2 control-label">销售日期</label>
 										<div class="col-sm-10">
-											<select class="form-control" id="sex" name="sex">
-											<option value="$!result.data.obj.sex">$!result.data.obj.sex</option>
-											#foreach($obj in $!result.data.contractSex)
-												<option value="$obj">$obj</option>
-											#end
+											<input class="form-control" id="saleDate" name="saleDate" value="$!result.data.obj.saleDateStr" onclick="javascript:WdatePicker({dateFmt:'yyyy-MM-dd'});" maxlength="100">
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">客户名称</label>
+										<div class="col-sm-10">
+												<select id="customerId" name="customerId" class="selectpicker show-tick form-control" data-live-search="true">  
+													<option value="$!result.data.obj.customerId">$!result.data.obj.customerName</option>
+<!-- 							                        <option selected="selected">--请选择--</option>   -->
+													#foreach($obj in $!result.data.infoList)
+														<option value="$obj.id">$obj.name</option>
+													#end
+							                    </select>  
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">收货人</label>
+										<div class="col-sm-10">
+<!-- 											<input class="form-control" id="takeUserName" name="takeUserName" value="$!result.data.obj.takeUserName" maxlength="100"> -->
+											<select class="form-control" id="takeUserName" name="takeUserName">
+												<option value="$!result.data.obj.takeUserName">$!result.data.obj.takeUserName</option>
 											</select>
 										</div> 
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">生日</label>
+										<label class="col-sm-2 control-label">签收人</label>
 										<div class="col-sm-10">
-											<input class="form-control" id="birthday" name="birthday" value="$!result.data.obj.birthdayStr" onclick="javascript:WdatePicker({dateFmt:'yyyy-MM-dd'});" maxlength="100">
+<!-- 											<input class="form-control" id="signUserName" name="signUserName" value="$!result.data.obj.signUserName" maxlength="100"> -->
+												<select class="form-control" id="signUserName" name="signUserName">
+													<option value="$!result.data.obj.signUserName">$!result.data.obj.signUserName</option>
+												</select>
 										</div> 
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">部门</label>
+										<label class="col-sm-2 control-label">机身编号</label>
 										<div class="col-sm-10">
-											<input class="form-control" id="depart" name="depart" value="$!result.data.obj.depart" maxlength="100">
+											<input class="form-control" id="goodNumber" name="goodNumber" value="$!result.data.obj.goodNumber" maxlength="100">
 										</div> 
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">职务</label>
+										<label class="col-sm-2 control-label">签收日期</label>
 										<div class="col-sm-10">
-											<input class="form-control" id="job" name="job" value="$!result.data.obj.job" maxlength="100">
+											<input class="form-control" id="signDate" name="signDate" value="$!result.data.obj.signDateStr" onclick="javascript:WdatePicker({dateFmt:'yyyy-MM-dd'});" maxlength="100">
 										</div> 
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">办公电话</label>
+										<label class="col-sm-2 control-label">发货日期</label>
 										<div class="col-sm-10">
-											<input class="form-control" id="officePhone" name="officePhone" value="$!result.data.obj.officePhone" maxlength="20">
+											<input class="form-control" id="sendDate" name="sendDate" value="$!result.data.obj.sendDateStr" onclick="javascript:WdatePicker({dateFmt:'yyyy-MM-dd'});" maxlength="100">
 										</div> 
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">手机号码</label>
+										<label class="col-sm-2 control-label">加密狗编号</label>
 										<div class="col-sm-10">
-											<input class="form-control" id="phone" name="phone" value="$!result.data.obj.phone" maxlength="20">
+											<input class="form-control" id="passNumber" name="passNumber" value="$!result.data.obj.passNumber" maxlength="100">
 										</div> 
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">电子邮件</label>
+										<label class="col-sm-2 control-label">条形码</label>
 										<div class="col-sm-10">
-											<input class="form-control" id="email" name="email" value="$!result.data.obj.email" maxlength="250">
+											<input class="form-control" id="code" name="code" value="$!result.data.obj.code" maxlength="100">
 										</div> 
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">QQ</label>
+										<label class="col-sm-2 control-label">报价单编号</label>
 										<div class="col-sm-10">
-											<input class="form-control" id="qq" name="qq" value="$!result.data.obj.qq" maxlength="20">
-										</div> 
-									</div>
-									<div class="form-group">
-										<label class="col-sm-2 control-label">传真</label>
-										<div class="col-sm-10">
-											<input class="form-control" id="fax" name="fax" value="$!result.data.obj.fax" maxlength="20">
+											<input class="form-control" id="pageNumber" name="pageNumber" value="$!result.data.obj.pageNumber" maxlength="100">
 										</div> 
 									</div>
 									
+									<div class="form-group">
+										<label class="col-sm-2 control-label">应收金额</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="preMoney" name="preMoney" value="$!result.data.obj.preMoney" maxlength="100">
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">实收金额</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="reciveMoney" name="reciveMoney" value="$!result.data.obj.reciveMoney" maxlength="100">
+										</div> 
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-2 control-label">是否开具发票</label>
+										<div class="col-lg-2">
+											<div class="checkbox">
+												<label> 
+													<input type="checkbox" id="isBill" name="isBill" value="1" >
+												</label>
+											</div>
+										</div>
+									</div>
 
 									<div class="form-group">
 										<label class="col-sm-2 control-label"></label>
@@ -108,6 +146,7 @@
 	<!-- /. PAGE INNER  -->
 </div>
 
-<script src="$PathHelper.getLocalUrl()pages/customer/js/contract-update.js"></script>
+<script src="$PathHelper.getLocalUrl()pages/customer/js/sales-update.js"></script>
 <script src="$PathHelper.getLocalUrl()common/bootsrap-validator/bootstrapValidator.min.js"></script>
+<script src="$PathHelper.getLocalUrl()common/bootstrap-select/bootstrap-select.min.js"></script>
 <script src="$PathHelper.getLocalUrl()common/My97DatePicker/WdatePicker.js"></script>

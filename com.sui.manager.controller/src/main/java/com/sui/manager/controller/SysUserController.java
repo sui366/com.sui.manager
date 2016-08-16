@@ -21,6 +21,7 @@ import com.sui.manager.common.business.Result;
 import com.sui.manager.common.entity.po.SysUser;
 import com.sui.manager.common.entity.qo.SysUserQo;
 import com.sui.manager.common.entity.vo.SysUserVo;
+import com.sui.manager.common.enums.UserStatusEnum;
 import com.sui.manager.service.SysUserService;
 
 @Controller
@@ -90,6 +91,8 @@ public class SysUserController extends CrudController<SysUser, SysUserService> {
 			BeanUtils.copyProperties(vo, po);
 			result.setValue("obj", vo);
 		}
+		
+		result.setValue("UserStatusEnum", UserStatusEnum.values());
 		
 		return new ModelAndView("sysUser/sys-user-update").addObject("result", result);
 	}

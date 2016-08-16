@@ -24,6 +24,7 @@ public class CustomerContract extends BasePojo {
 	private String fax;
 	private Timestamp insertTime;
 	private String insertUser;
+	private Integer customerId;
 
 	public Integer getId() {
 		return id;
@@ -117,23 +118,13 @@ public class CustomerContract extends BasePojo {
 		this.insertUser = insertUser;
 	}
 
-	@Override
-	public String toString() {
-		return "CustomerContract "+ 
-				"[id=" + id +
-				", name=" + name + 
-				", sex=" + sex + 
-				", birthday=" + birthday + 
-				", depart=" + depart + 
-				", job=" + job + 
-				", officePhone=" + officePhone + 
-				", phone=" + phone + 
-				", email=" + email + 
-				", qq=" + qq + 
-				", fax=" + fax + 
-				", insertTime=" + insertTime + 
-				", insertUser=" + insertUser + 
-		"]";
+	public Integer getCustomerId() {
+		return customerId;
 	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
 
 }

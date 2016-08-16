@@ -9,6 +9,10 @@ public class CustomerContractQo extends PageQo {
 	private Integer id;
 
 	private String name;
+	
+	private Integer customerId;
+	
+	private String customerName;
 
 	@SingleValue(column = "id", equal = "=")
 	public Integer getId() {
@@ -30,5 +34,24 @@ public class CustomerContractQo extends PageQo {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	@SingleValue(column = "customer_id", equal = "=")
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	
+	
 	
 }

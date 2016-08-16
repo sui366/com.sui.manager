@@ -11,6 +11,7 @@
 	<result column="remark" property="remark" jdbcType="VARCHAR" />
 	<result column="insert_user" property="insertUser" jdbcType="VARCHAR" />
 	<result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+	<result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <select id="query" resultMap="BaseResultMap" parameterType="com.shunwang.business.framework.mybatis.query.ConditionQuery">
 		select t.*
@@ -53,7 +54,8 @@
 		email,
 		remark,
 		insert_user,
-		insert_time
+		insert_time,
+		status
 	)
     values (
 		#{name,jdbcType=VARCHAR},
@@ -63,7 +65,8 @@
 		#{email,jdbcType=VARCHAR},
 		#{remark,jdbcType=VARCHAR},
 		#{insertUser,jdbcType=VARCHAR},
-		now()
+		now(),
+		#{status,jdbcType=TINYINT}
     )
   </insert>
   <update id="update" parameterType="com.sui.manager.common.entity.po.SysUser" >
@@ -76,7 +79,9 @@
 		email = #{email,jdbcType=VARCHAR},
 		remark = #{remark,jdbcType=VARCHAR},
 		insert_user = #{insertUser,jdbcType=VARCHAR},
-		insert_time = now()
+		insert_time = now(),
+		status = #{status,jdbcType=TINYINT}
+		
     where 
 		id = #{id,jdbcType=INTEGER}
   </update>
@@ -90,7 +95,8 @@
 		email,
 		remark,
 		insert_user,
-		insert_time
+		insert_time,
+		status
     from sys_user
     where 
 		id = #{id,jdbcType=INTEGER}

@@ -4,10 +4,10 @@ function PageList() {
 PageList.prototype = {
 	
 	toInertPage:function(){
-		window.location.href= pathHelper_localUrl+"customer/contract/updatePage.shtml?t="+new Date().getTime();
+		window.location.href= pathHelper_localUrl+"customer/sales/updatePage.shtml?t="+new Date().getTime();
 	},
 	toUpdatePage:function(id){
-		window.location.href= pathHelper_localUrl+"customer/contract/updatePage.shtml?t="+new Date().getTime()+"&id="+id;
+		window.location.href= pathHelper_localUrl+"customer/sales/updatePage.shtml?t="+new Date().getTime()+"&id="+id;
 	},
 	
 	deleteObj:function(id){
@@ -22,14 +22,14 @@ PageList.prototype = {
 			var index = layer.load();
 			$.ajax({
 				type : "post",
-				url : pathHelper_localUrl+"customer/contract/delete.action",
+				url : pathHelper_localUrl+"customer/sales/delete.action",
 				data : {"id":id},
 				complete:function(){
 					layer.close(index);
 				},
 				success : function(result) {
 					if(result.success){
-						window.location.href= pathHelper_localUrl+"customer/contract/list.shtml";
+						window.location.href= pathHelper_localUrl+"customer/sales/list.shtml";
 					}else{
 						layer.alert(result.message);
 					}
@@ -45,8 +45,7 @@ PageList.prototype = {
 	            '<button type="button" class="btn btn-default resend" onclick="javascript:pageList.toUpdatePage('+row.id+');">&nbsp;修&nbsp;改&nbsp;</button>',
 	            '<button type="button" class="btn btn-default resend" onclick="javascript:pageList.deleteObj('+row.id+');">&nbsp;删&nbsp;除&nbsp;</button>'
 	    ].join('');
-	}
-	
+	},
 	
 }
 
@@ -66,7 +65,6 @@ $(document).ready(function() {
 
 function queryParams(params){
 	return {  
-        "name": $("#name").val(),  
         "customerName": $("#customerName").val(),  
         "limit":params.limit,"offset":params.offset,
         "sortname":params.sort,"sortorder":params.order

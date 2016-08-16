@@ -66,7 +66,7 @@ $(document).ready(function() {
 
 function queryParams(params){
 	return {  
-        "jobNameVague": $("#jobName").val(),  
+        "name": $("#name").val(),  
         "limit":params.limit,"offset":params.offset,
         "sortname":params.sort,"sortorder":params.order
     };

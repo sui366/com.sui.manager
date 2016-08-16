@@ -15,10 +15,12 @@
 	<result column="fax" property="fax" jdbcType="VARCHAR" />
 	<result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
 	<result column="insert_user" property="insertUser" jdbcType="VARCHAR" />
+	<result column="customer_id" property="customerId" jdbcType="INTEGER" />
+	<result column="customerName" property="customerName" jdbcType="VARCHAR" />
   </resultMap>
   <select id="query" resultMap="BaseResultMap" parameterType="com.shunwang.business.framework.mybatis.query.ConditionQuery">
-		select t.*
-		from customer_contract t
+		select t.*,info.name as customerName
+		from customer_contract t left join customer_info info on t.customer_id=info.id 
 		<include refid="conditionQuery.core" />
 		order by
 		<choose>
@@ -37,7 +39,7 @@
   <select id="queryCnt"
 		parameterType="com.shunwang.business.framework.mybatis.query.ConditionQuery"
 		resultType="java.lang.Integer">
-		select count(*) from customer_contract t
+		select count(*) from customer_contract t left join customer_info info on t.customer_id=info.id 
 		<include refid="conditionQuery.core" />
   </select>
   <delete id="delete" parameterType="java.lang.Integer" >
@@ -61,7 +63,8 @@
 		qq,
 		fax,
 		insert_time,
-		insert_user
+		insert_user,
+		customer_id
 	)
     values (
 		#{name,jdbcType=VARCHAR},
@@ -75,7 +78,8 @@
 		#{qq,jdbcType=VARCHAR},
 		#{fax,jdbcType=VARCHAR},
 		now(),
-		#{insertUser,jdbcType=VARCHAR}
+		#{insertUser,jdbcType=VARCHAR},
+		#{customerId,jdbcType=INTEGER}
     )
   </insert>
   <update id="update" parameterType="com.sui.manager.common.entity.po.CustomerContract" >
@@ -92,27 +96,30 @@
 		qq = #{qq,jdbcType=VARCHAR},
 		fax = #{fax,jdbcType=VARCHAR},
 		insert_time = now(),
-		insert_user = #{insertUser,jdbcType=VARCHAR}
+		insert_user = #{insertUser,jdbcType=VARCHAR},
+		customer_id = #{customerId,jdbcType=INTEGER}
     where 
 		id = #{id,jdbcType=INTEGER}
   </update>
   <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    	id,
-		name,
-		sex,
-		birthday,
-		depart,
-		job,
-		office_phone,
-		phone,
-		email,
-		qq,
-		fax,
-		insert_time,
-		insert_user
-    from customer_contract
+    	t.id,
+		t.name,
+		t.sex,
+		t.birthday,
+		t.depart,
+		t.job,
+		t.office_phone,
+		t.phone,
+		t.email,
+		t.qq,
+		t.fax,
+		t.insert_time,
+		t.insert_user,
+		t.customer_id,
+		info.name as customerName
+    from customer_contract t left join customer_info info on t.customer_id=info.id 
     where 
-		id = #{id,jdbcType=INTEGER}
+		t.id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

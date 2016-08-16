@@ -15,15 +15,16 @@
 	<result column="code" property="code" jdbcType="VARCHAR" />
 	<result column="page_number" property="pageNumber" jdbcType="VARCHAR" />
 	<result column="is_bill" property="isBill" jdbcType="TINYINT" />
-	<result column="pre_money" property="preMoney" jdbcType="DECIMAL" />
-	<result column="recive_money" property="reciveMoney" jdbcType="DECIMAL" />
+	<result column="pre_money" property="preMoney" jdbcType="VARCHAR" />
+	<result column="recive_money" property="reciveMoney" jdbcType="VARCHAR" />
 	<result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
 	<result column="insert_user" property="insertUser" jdbcType="VARCHAR" />
 	<result column="remark" property="remark" jdbcType="VARCHAR" />
+	<result column="customerName" property="customerName" jdbcType="VARCHAR" />
   </resultMap>
   <select id="query" resultMap="BaseResultMap" parameterType="com.shunwang.business.framework.mybatis.query.ConditionQuery">
-		select t.*
-		from customer_sales t
+		select t.*,info.name as customerName 
+		from customer_sales t left join customer_info info on t.customer_id=info.id 
 		<include refid="conditionQuery.core" />
 		order by
 		<choose>
@@ -42,7 +43,7 @@
   <select id="queryCnt"
 		parameterType="com.shunwang.business.framework.mybatis.query.ConditionQuery"
 		resultType="java.lang.Integer">
-		select count(*) from customer_sales t
+		select count(*) from customer_sales t left join customer_info info on t.customer_id=info.id
 		<include refid="conditionQuery.core" />
   </select>
   <delete id="delete" parameterType="java.lang.Integer" >
@@ -86,8 +87,8 @@
 		#{code,jdbcType=VARCHAR},
 		#{pageNumber,jdbcType=VARCHAR},
 		#{isBill,jdbcType=TINYINT},
-		#{preMoney,jdbcType=DECIMAL},
-		#{reciveMoney,jdbcType=DECIMAL},
+		#{preMoney,jdbcType=VARCHAR},
+		#{reciveMoney,jdbcType=VARCHAR},
 		now(),
 		#{insertUser,jdbcType=VARCHAR},
 		#{remark,jdbcType=VARCHAR}
@@ -108,8 +109,8 @@
 		code = #{code,jdbcType=VARCHAR},
 		page_number = #{pageNumber,jdbcType=VARCHAR},
 		is_bill = #{isBill,jdbcType=TINYINT},
-		pre_money = #{preMoney,jdbcType=DECIMAL},
-		recive_money = #{reciveMoney,jdbcType=DECIMAL},
+		pre_money = #{preMoney,jdbcType=VARCHAR},
+		recive_money = #{reciveMoney,jdbcType=VARCHAR},
 		insert_time = now(),
 		insert_user = #{insertUser,jdbcType=VARCHAR},
 		remark = #{remark,jdbcType=VARCHAR}
@@ -117,26 +118,27 @@
 		id = #{id,jdbcType=INTEGER}
   </update>
   <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id,
-		good_version,
-		sale_date,
-		customer_id,
-		take_user_name,
-		sign_user_name,
-		good_number,
-		sign_date,
-		send_date,
-		pass_number,
-		code,
-		page_number,
-		is_bill,
-		pre_money,
-		recive_money,
-		insert_time,
-		insert_user,
-		remark
-    from customer_sales
+    select sales.id,
+		sales.good_version,
+		sales.sale_date,
+		sales.customer_id,
+		sales.take_user_name,
+		sales.sign_user_name,
+		sales.good_number,
+		sales.sign_date,
+		sales.send_date,
+		sales.pass_number,
+		sales.code,
+		sales.page_number,
+		sales.is_bill,
+		sales.pre_money,
+		sales.recive_money,
+		sales.insert_time,
+		sales.insert_user,
+		sales.remark,
+		info.name as customerName  
+    from customer_sales sales left join customer_info info on sales.customer_id=info.id 
     where 
-		id = #{id,jdbcType=INTEGER}
+		sales.id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

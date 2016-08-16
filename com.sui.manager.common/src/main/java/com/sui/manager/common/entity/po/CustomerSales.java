@@ -1,7 +1,7 @@
 package com.sui.manager.common.entity.po;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import com.shunwang.business.framework.pojo.BasePojo;
 
@@ -15,8 +15,8 @@ public class CustomerSales extends BasePojo {
 	private String goodVersion;
 	private Date saleDate;
 	private Integer customerId;
-	private Integer takeUserName;
-	private Integer signUserName;
+	private String takeUserName;
+	private String signUserName;
 	private String goodNumber;
 	private Date signDate;
 	private Date sendDate;
@@ -24,8 +24,8 @@ public class CustomerSales extends BasePojo {
 	private String code;
 	private String pageNumber;
 	private Integer isBill;
-	private Double preMoney;
-	private Double reciveMoney;
+	private String preMoney;
+	private String reciveMoney;
 	private Timestamp insertTime;
 	private String insertUser;
 	private String remark;
@@ -107,18 +107,18 @@ public class CustomerSales extends BasePojo {
 	public void setIsBill(Integer isBill) {
 		this.isBill = isBill;
 	}
-	public Double getPreMoney() {
+	public String getPreMoney() {
 		return preMoney;
 	}
 
-	public void setPreMoney(Double preMoney) {
+	public void setPreMoney(String preMoney) {
 		this.preMoney = preMoney;
 	}
-	public Double getReciveMoney() {
+	public String getReciveMoney() {
 		return reciveMoney;
 	}
 
-	public void setReciveMoney(Double reciveMoney) {
+	public void setReciveMoney(String reciveMoney) {
 		this.reciveMoney = reciveMoney;
 	}
 	public Timestamp getInsertTime() {
@@ -143,19 +143,19 @@ public class CustomerSales extends BasePojo {
 		this.remark = remark;
 	}
 
-	public Integer getTakeUserName() {
+	public String getTakeUserName() {
 		return takeUserName;
 	}
 
-	public void setTakeUserName(Integer takeUserName) {
+	public void setTakeUserName(String takeUserName) {
 		this.takeUserName = takeUserName;
 	}
 
-	public Integer getSignUserName() {
+	public String getSignUserName() {
 		return signUserName;
 	}
 
-	public void setSignUserName(Integer signUserName) {
+	public void setSignUserName(String signUserName) {
 		this.signUserName = signUserName;
 	}
 

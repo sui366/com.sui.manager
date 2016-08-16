@@ -155,11 +155,19 @@ public class CustomerInfoController extends BaseController<CustomerInfo, Custome
 		return result;
 	}
 	
-//	@InitBinder  
-//    protected void initBinder(HttpServletRequest request,  
-//            ServletRequestDataBinder binder) throws Exception {  
-//            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");  
-//            CustomDateEditor editor = new CustomDateEditor(df, false);  
-//            binder.registerCustomEditor(Date.class, editor);  
-//    }  
+	/**
+	 * 获取客户名称
+	 */
+	@RequestMapping("/customer/info/customerInfo")
+	@ResponseBody
+	public Result customerInfo(CustomerInfoQo qo, HttpServletRequest request) throws Exception {
+		Result result = new Result();
+		
+		qo.setRp(999);
+		List<CustomerInfo> list = bo.query(qo);
+		
+		result.setValue("list", list);
+		
+		return result;
+	}
 }

@@ -8,26 +8,35 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shunwang.business.framework.mybatis.query.condition.Condition;
+import com.shunwang.business.framework.mybatis.query.condition.ConditionFactory;
 import com.shunwang.business.framework.pojo.Page;
 import com.shunwang.business.framework.spring.mvc.controller.CrudController;
 import com.sui.manager.common.business.Result;
 import com.sui.manager.common.constant.Constants;
 import com.sui.manager.common.entity.po.CustomerContract;
+import com.sui.manager.common.entity.po.CustomerInfo;
 import com.sui.manager.common.entity.qo.CustomerContractQo;
+import com.sui.manager.common.entity.qo.CustomerInfoQo;
 import com.sui.manager.common.entity.vo.CustomerContractVo;
 import com.sui.manager.service.CustomerContractService;
+import com.sui.manager.service.CustomerInfoService;
 
 @Controller
 public class CustomerContractController extends CrudController<CustomerContract, CustomerContractService> {
 
 	private Logger logger = Logger.getLogger(getClass());
+	
+	@Autowired
+	private CustomerInfoService customerInfoService;
 
 	/**
 	 * 列表
@@ -36,6 +45,7 @@ public class CustomerContractController extends CrudController<CustomerContract,
 	public ModelAndView list(CustomerContractQo query, HttpServletRequest request) throws Exception {
 		Result result = new Result(request);
 		List<Condition> conditions = new ArrayList<Condition>();
+		
 		Page page = null;
 		try {
 			page = bo.list(query, conditions);
@@ -55,6 +65,11 @@ public class CustomerContractController extends CrudController<CustomerContract,
 	@ResponseBody
 	public Object tableData(CustomerContractQo query, HttpServletRequest request) throws Exception {
 		List<Condition> conditions = new ArrayList<Condition>();
+		
+		if(StringUtils.isNotBlank(query.getCustomerName())){
+			conditions.add(ConditionFactory.buildSqlCondition("info.name  like '%"+query.getCustomerName()+"%'"));
+		}
+		
 		Page page = null;
 		try {
 			page = bo.list(query, conditions);
@@ -91,6 +106,11 @@ public class CustomerContractController extends CrudController<CustomerContract,
 			BeanUtils.copyProperties(vo, po);
 			result.setValue("obj", vo);
 		}
+		
+		CustomerInfoQo infoQo = new CustomerInfoQo();
+		infoQo.setRp(999);
+		List<CustomerInfo> infoList = customerInfoService.query(infoQo);
+		result.setValue("infoList", infoList);
 		
 		result.setValue("contractSex", Constants.CONSTANTSMAP.get(Constants.SEX));
 
@@ -144,5 +164,23 @@ public class CustomerContractController extends CrudController<CustomerContract,
 
 		return result;
 	}
-
+	/**
+	 * 获取客户联系人
+	 */
+	@RequestMapping("/customer/contract/info")
+	@ResponseBody
+	public Result contractInfo(CustomerContractQo qo, HttpServletRequest request) throws Exception {
+		Result result = new Result();
+		
+		if (null == qo.getCustomerId()) {
+			return result;
+		}
+		
+		qo.setRp(999);
+		List<CustomerContract> list = bo.query(qo);
+		
+		result.setValue("list", list);
+		
+		return result;
+	}
 }

@@ -1,7 +1,8 @@
 package com.sui.manager.common.entity.po;
 
-import com.shunwang.business.framework.pojo.BasePojo;
 import java.sql.Timestamp;
+
+import com.shunwang.business.framework.pojo.BasePojo;
 
 public class SysUser extends BasePojo {
 	/**
@@ -18,6 +19,7 @@ public class SysUser extends BasePojo {
 	private String remark;
 	private String insertUser;
 	private Timestamp insertTime;
+	private Integer status;
 
 	public Integer getId() {
 		return id;
@@ -83,19 +85,14 @@ public class SysUser extends BasePojo {
 		this.insertTime = insertTime;
 	}
 
-	@Override
-	public String toString() {
-		return "SysUser "+ 
-				"[id=" + id +
-				", name=" + name + 
-				", dept=" + dept + 
-				", officePhone=" + officePhone + 
-				", mobilePhone=" + mobilePhone + 
-				", email=" + email + 
-				", remark=" + remark + 
-				", insertUser=" + insertUser + 
-				", insertTime=" + insertTime + 
-		"]";
+	public Integer getStatus() {
+		return status;
 	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	
+	
 
 }

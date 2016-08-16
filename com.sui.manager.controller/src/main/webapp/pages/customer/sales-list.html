@@ -15,9 +15,9 @@
    	   	<div class="col-lg-12">
            <legend>查询</legend>
           <div class="form-group">
-             <label class="col-sm-2 control-label">联系人名称</label>
+             <label class="col-sm-2 control-label">客户名称</label>
              <div class="col-sm-2">
-                <input class="form-control" id="name" name="name"/>
+                <input class="form-control" id="customerName" name="customerName"/>
              </div>
              <label class="control-label"></label>
              <div class="col-sm-2">
@@ -54,20 +54,20 @@
 					   >
 						<thead>
 							<tr>
-								<th data-sortable="true" data-field="goodVersion">商品型号</th>
-								<th data-sortable="true" data-field="saleDateStr">销售日期</th>
-								<th data-sortable="true" data-field="customerName">客户名称</th>
-								<th data-sortable="true" data-field="takeUserName">收货人</th>
-								<th data-sortable="true" data-field="signUserName">签收人</th>
-								<th data-sortable="true" data-field="goodNumber">机身编号</th>
-								<th data-sortable="true" data-field="signDateStr">签收日期</th>
-								<th data-sortable="true" data-field="sendDate">发货日期</th>
-								<th data-sortable="true" data-field="passNumber">加密狗编号</th>
-								<th data-sortable="true" data-field="code">条形码</th>
-								<th data-sortable="true" data-field="pageNumber">报价单编号</th>
-								<th data-sortable="true" data-field="isBill">是否开具发票</th>
-								<th data-sortable="true" data-field="preMoney">应收金额</th>
-								<th data-sortable="true" data-field="reciveMoney">实收金额</th>
+								<th data-sortable="false" data-field="goodVersion">商品型号</th>
+								<th data-sortable="false" data-field="saleDateStr">销售日期&nbsp;&nbsp;</th>
+								<th data-sortable="false" data-field="customerName">客户名称</th>
+								<th data-sortable="false" data-field="takeUserName">收货人</th>
+								<th data-sortable="false" data-field="signUserName">签收人</th>
+								<th data-sortable="false" data-field="goodNumber">机身编号</th>
+								<th data-sortable="false" data-field="signDateStr">签收日期&nbsp;&nbsp;</th>
+								<th data-sortable="false" data-field="sendDateStr">发货日期&nbsp;&nbsp;</th>
+								<th data-sortable="false" data-field="passNumber">加密狗编号</th>
+								<th data-sortable="false" data-field="code">条形码</th>
+								<th data-sortable="false" data-field="pageNumber">报价单编号</th>
+								<th data-sortable="false" data-field="isBillStr">是否开具发票</th>
+								<th data-sortable="false" data-field="preMoney">应收金额</th>
+								<th data-sortable="false" data-field="reciveMoney">实收金额</th>
 								
 								<th data-field="action" data-formatter="pageList.actionFormatter" data-events="actionEvents">操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 							</tr>
@@ -85,4 +85,4 @@
 	</div>
 </div>
 
-<script src="$PathHelper.getLocalUrl()pages/customer/js/contract-list.js"></script>
+<script src="$PathHelper.getLocalUrl()pages/customer/js/sales-list.js"></script>

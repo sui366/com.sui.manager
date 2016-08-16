@@ -27,6 +27,9 @@
                             <li >
                                 <a id="customerContractList" href="$PathHelper.getLocalUrl()customer/contract/list.shtml?activeLi=customerLi&activeMenu=customerContractList"><i></i>客户联系人</a>
                             </li>
+                            <li >
+                                <a id="customerSalesList" href="$PathHelper.getLocalUrl()customer/sales/list.shtml?activeLi=customerLi&activeMenu=customerSalesList"><i></i>销售记录</a>
+                            </li>
                         </ul>
                     </li>
                     
@@ -55,13 +58,12 @@
 	    }
     }
     
-//     $(".navbar-side").find("a").removeClass("active-menu");
-//     if(isDataNull(activeMenu)){
-// 	    $(".navbar-side").find("#"+activeMenu).addClass("active-menu");
-//     }
-//     else{//默认展开网维第一个节点
-//     	window.location.href=$("#dataicafe li:first a").attr("href");
-//     }
+    $(".navbar-side").find("a").removeClass("active-menu");
+    if(isDataNull(activeMenu)){
+	    $(".navbar-side").find("#"+activeMenu).addClass("active-menu");
+    }
+    else{
+    }
     
     //激活当前节点
     function activeCurrentNode(){

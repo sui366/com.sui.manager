@@ -1,4 +1,6 @@
 <link href="$PathHelper.getStaticUrl()common/bootsrap-validator/bootstrapValidator.min.css" rel="stylesheet" />
+<link href="$PathHelper.getStaticUrl()common/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+
 
 <div id="page-wrapper">
 	<div class="header">
@@ -24,6 +26,18 @@
 										<label class="col-sm-2 control-label">姓名</label>
 										<div class="col-sm-10">
 											<input class="form-control" id="name" name="name" value="$!result.data.obj.name" maxlength="50">
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">客户名称</label>
+										<div class="col-sm-10">
+												<select id="customerId" name="customerId" class="selectpicker show-tick form-control" data-live-search="true">  
+													<option value="$!result.data.obj.customerId">$!result.data.obj.customerName</option>
+<!-- 							                        <option selected="selected">--请选择--</option>   -->
+													#foreach($obj in $!result.data.infoList)
+														<option value="$obj.id">$obj.name</option>
+													#end
+							                    </select>  
 										</div> 
 									</div>
 									<div class="form-group">
@@ -111,3 +125,5 @@
 <script src="$PathHelper.getLocalUrl()pages/customer/js/contract-update.js"></script>
 <script src="$PathHelper.getLocalUrl()common/bootsrap-validator/bootstrapValidator.min.js"></script>
 <script src="$PathHelper.getLocalUrl()common/My97DatePicker/WdatePicker.js"></script>
+<script src="$PathHelper.getLocalUrl()common/bootstrap-select/bootstrap-select.min.js"></script>
+

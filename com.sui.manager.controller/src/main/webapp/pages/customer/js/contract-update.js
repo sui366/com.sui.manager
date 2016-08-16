@@ -18,6 +18,11 @@ PageUpdate.prototype = {
 	                    stringLength:{max:100, message: '长度不能超过100个字符'}
 	                }
 	            },
+	            customerId: {
+	            	validators: {
+	            		notEmpty: {  message: '客户名称不能为空' }
+	            	}
+	            },
 	            point: {
 	            	validators: {
 	            		digits: {  message: '请正确填写积分' },
