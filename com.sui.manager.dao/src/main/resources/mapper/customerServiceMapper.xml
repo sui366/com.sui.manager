@@ -5,8 +5,8 @@
 	<id column="id" property="id" jdbcType="INTEGER" />
 	<result column="title" property="title" jdbcType="VARCHAR" />
 	<result column="customer_id" property="customerId" jdbcType="INTEGER" />
-	<result column="contract_id" property="contractId" jdbcType="INTEGER" />
-	<result column="recive_man_id" property="reciveManId" jdbcType="INTEGER" />
+	<result column="contract_name" property="contractName" jdbcType="VARCHAR" />
+	<result column="recive_man_name" property="reciveManName" jdbcType="VARCHAR" />
 	<result column="type" property="type" jdbcType="VARCHAR" />
 	<result column="status" property="status" jdbcType="VARCHAR" />
 	<result column="feed_date" property="feedDate" jdbcType="DATE" />
@@ -15,7 +15,7 @@
 	<result column="solvers" property="solvers" jdbcType="VARCHAR" />
 	<result column="grade" property="grade" jdbcType="VARCHAR" />
 	<result column="content" property="content" jdbcType="VARCHAR" />
-	<result column="result" property=" result" jdbcType="VARCHAR" />
+	<result column="result" property="result" jdbcType="VARCHAR" />
 	<result column="insert_user" property="insertUser" jdbcType="VARCHAR" />
 	<result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -55,8 +55,8 @@
     insert into customer_service (
 		title,
 		customer_id,
-		contract_id,
-		recive_man_id,
+		contract_name,
+		recive_man_name,
 		type,
 		status,
 		feed_date,
@@ -65,15 +65,15 @@
 		solvers,
 		grade,
 		content,
-		 result,
+		result,
 		insert_user,
 		insert_time
 	)
     values (
 		#{title,jdbcType=VARCHAR},
 		#{customerId,jdbcType=INTEGER},
-		#{contractId,jdbcType=INTEGER},
-		#{reciveManId,jdbcType=INTEGER},
+		#{contractName,jdbcType=VARCHAR},
+		#{reciveManName,jdbcType=VARCHAR},
 		#{type,jdbcType=VARCHAR},
 		#{status,jdbcType=VARCHAR},
 		#{feedDate,jdbcType=DATE},
@@ -92,8 +92,8 @@
     set 
 		title = #{title,jdbcType=VARCHAR},
 		customer_id = #{customerId,jdbcType=INTEGER},
-		contract_id = #{contractId,jdbcType=INTEGER},
-		recive_man_id = #{reciveManId,jdbcType=INTEGER},
+		contract_name = #{contractName,jdbcType=VARCHAR},
+		recive_man_name = #{reciveManName,jdbcType=VARCHAR},
 		type = #{type,jdbcType=VARCHAR},
 		status = #{status,jdbcType=VARCHAR},
 		feed_date = #{feedDate,jdbcType=DATE},
@@ -102,7 +102,7 @@
 		solvers = #{solvers,jdbcType=VARCHAR},
 		grade = #{grade,jdbcType=VARCHAR},
 		content = #{content,jdbcType=VARCHAR},
-		 result = #{ result,jdbcType=VARCHAR},
+		result = #{result,jdbcType=VARCHAR},
 		insert_user = #{insertUser,jdbcType=VARCHAR},
 		insert_time = now()
     where 
@@ -112,8 +112,8 @@
     select id,
 		title,
 		customer_id,
-		contract_id,
-		recive_man_id,
+		contract_name,
+		recive_man_name,
 		type,
 		status,
 		feed_date,
@@ -122,7 +122,7 @@
 		solvers,
 		grade,
 		content,
-		 result,
+		result,
 		insert_user,
 		insert_time
     from customer_service

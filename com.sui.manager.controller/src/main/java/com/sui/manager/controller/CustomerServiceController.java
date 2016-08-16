@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,16 +19,34 @@ import com.shunwang.business.framework.mybatis.query.condition.Condition;
 import com.shunwang.business.framework.pojo.Page;
 import com.shunwang.business.framework.spring.mvc.controller.CrudController;
 import com.sui.manager.common.business.Result;
+import com.sui.manager.common.constant.Constants;
+import com.sui.manager.common.entity.po.CustomerInfo;
 import com.sui.manager.common.entity.po.CustomerService;
+import com.sui.manager.common.entity.po.SysUser;
+import com.sui.manager.common.entity.qo.CustomerInfoQo;
 import com.sui.manager.common.entity.qo.CustomerServiceQo;
-import com.sui.manager.common.entity.vo.CustomerSalesVo;
+import com.sui.manager.common.entity.qo.SysUserQo;
+import com.sui.manager.common.entity.vo.CustomerServiceVo;
+import com.sui.manager.common.enums.UserStatusEnum;
+import com.sui.manager.service.CustomerContractService;
+import com.sui.manager.service.CustomerInfoService;
 import com.sui.manager.service.CustomerServiceService;
+import com.sui.manager.service.SysUserService;
 
 @Controller
 public class CustomerServiceController extends CrudController<CustomerService, CustomerServiceService> {
 	
 	private Logger logger = Logger.getLogger(getClass());
 
+	@Autowired
+	private CustomerInfoService customerInfoService;
+	
+	@Autowired
+	private CustomerContractService customerContractService;
+	
+	@Autowired
+	private SysUserService sysUserService;
+	
 	/**
 	 * 列表
 	 */
@@ -63,7 +82,7 @@ public class CustomerServiceController extends CrudController<CustomerService, C
 		List<Object> list = new ArrayList<Object>();
 
 		@SuppressWarnings("unchecked")
-		List<CustomerSalesVo> pageList = (List<CustomerSalesVo>) page.getRows();
+		List<CustomerServiceVo> pageList = (List<CustomerServiceVo>) page.getRows();
 
 		list.add(pageList);
 
@@ -86,10 +105,28 @@ public class CustomerServiceController extends CrudController<CustomerService, C
 		if(query.getId() != null){
 			
 			CustomerService po = bo.get(query.getId());
-			CustomerSalesVo vo = new CustomerSalesVo();
+			
+//			if(null == )
+			
+			CustomerServiceVo vo = new CustomerServiceVo();
 			BeanUtils.copyProperties(vo, po);
 			result.setValue("obj", vo);
 		}
+		
+		CustomerInfoQo infoQo = new CustomerInfoQo();
+		infoQo.setRp(999);
+		List<CustomerInfo> infoList = customerInfoService.query(infoQo);
+		result.setValue("infoList", infoList);
+		
+		SysUserQo userQo = new SysUserQo();
+		userQo.setStatus(UserStatusEnum.ON_LINE.getType());
+		userQo.setRp(999);
+		List<SysUser> userList = sysUserService.query(userQo);
+		result.setValue("userList", userList);
+		
+		result.setValue("serviceStatus", Constants.CONSTANTSMAP.get(Constants.CUSTOMER_SERVICE_STATUS));
+		result.setValue("serviceType", Constants.CONSTANTSMAP.get(Constants.CUSTOMER_SERVICE_TYPE));
+		result.setValue("serviceGrade", Constants.CONSTANTSMAP.get(Constants.CUSTOMER_SERVICE_GRADE));
 		
 		return new ModelAndView("customer/service-update").addObject("result", result);
 	}

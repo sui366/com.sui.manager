@@ -145,4 +145,20 @@ public class SysUserController extends CrudController<SysUser, SysUserService> {
 		return result;
 	}
 
+	/**
+	 * 获取用户列表
+	 */
+	@RequestMapping("/sysUser/userList")
+	@ResponseBody
+	public Result userList(SysUserQo qo, HttpServletRequest request) throws Exception {
+		Result result = new Result();
+		
+		qo.setStatus(UserStatusEnum.ON_LINE.getType());
+		qo.setRp(999);
+		List<SysUser> list = bo.query(qo);
+		
+		result.setValue("list", list);
+		
+		return result;
+	}
 }

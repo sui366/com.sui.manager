@@ -1,8 +1,9 @@
 package com.sui.manager.common.entity.po;
 
-import com.shunwang.business.framework.pojo.BasePojo;
 import java.sql.Timestamp;
-import java.sql.Date;
+import java.util.Date;
+
+import com.shunwang.business.framework.pojo.BasePojo;
 
 public class CustomerService extends BasePojo {
 	/**
@@ -23,9 +24,12 @@ public class CustomerService extends BasePojo {
 	private String solvers;
 	private String grade;
 	private String content;
-	private String  result;
+	private String result;
 	private String insertUser;
 	private Timestamp insertTime;
+	private String customerName;
+	private String contractName;
+	private String reciveManName;
 
 	public Integer getId() {
 		return id;
@@ -118,13 +122,6 @@ public class CustomerService extends BasePojo {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getResult() {
-		return  result;
-	}
-
-	public void setResult(String  result) {
-		this. result =  result;
-	}
 	public String getInsertUser() {
 		return insertUser;
 	}
@@ -140,26 +137,37 @@ public class CustomerService extends BasePojo {
 		this.insertTime = insertTime;
 	}
 
-	@Override
-	public String toString() {
-		return "CustomerService "+ 
-				"[id=" + id +
-				", title=" + title + 
-				", customerId=" + customerId + 
-				", contractId=" + contractId + 
-				", reciveManId=" + reciveManId + 
-				", type=" + type + 
-				", status=" + status + 
-				", feedDate=" + feedDate + 
-				", hopeSolveDate=" + hopeSolveDate + 
-				", visitDate=" + visitDate + 
-				", solvers=" + solvers + 
-				", grade=" + grade + 
-				", content=" + content + 
-				",  result=" +  result + 
-				", insertUser=" + insertUser + 
-				", insertTime=" + insertTime + 
-		"]";
+	public String getCustomerName() {
+		return customerName;
 	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getContractName() {
+		return contractName;
+	}
+
+	public void setContractName(String contractName) {
+		this.contractName = contractName;
+	}
+
+	public String getReciveManName() {
+		return reciveManName;
+	}
+
+	public void setReciveManName(String reciveManName) {
+		this.reciveManName = reciveManName;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
 
 }

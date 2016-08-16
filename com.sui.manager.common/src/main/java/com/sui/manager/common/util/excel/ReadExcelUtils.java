@@ -194,6 +194,9 @@ public class ReadExcelUtils {
 			Constants.CONSTANTSMAP.put(Constants.CUSTOMER_INFO_CREDIT_LEVEL, readCol(4));
 			Constants.CONSTANTSMAP.put(Constants.CUSTOMER_INFO_SOURCE, readCol(5));
 			Constants.CONSTANTSMAP.put(Constants.SEX, readCol(6));
+			Constants.CONSTANTSMAP.put(Constants.CUSTOMER_SERVICE_GRADE, readCol(7));
+			Constants.CONSTANTSMAP.put(Constants.CUSTOMER_SERVICE_STATUS, readCol(8));
+			Constants.CONSTANTSMAP.put(Constants.CUSTOMER_SERVICE_TYPE, readCol(9));
 		} catch (Exception e) {
 			throw new Exception(e);
 		}

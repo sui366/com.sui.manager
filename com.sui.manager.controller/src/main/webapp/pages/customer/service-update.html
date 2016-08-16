@@ -1,0 +1,165 @@
+<link href="$PathHelper.getStaticUrl()common/bootsrap-validator/bootstrapValidator.min.css" rel="stylesheet" />
+<link href="$PathHelper.getStaticUrl()common/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+
+<div id="page-wrapper">
+	<div class="header">
+		<ol class="breadcrumb">
+<!-- 			<li><a href="#">Home</a></li> -->
+<!-- 			<li><a href="#">定时任务监控</a></li> -->
+<!-- 			<li class="active">定时任务更新</li> -->
+		</ol>
+
+	</div>
+
+	<div id="page-inner">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">#if($!result.data.obj) 更新销售记录 #else 新增销售记录#end</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-8">
+								<form class="form-horizontal" role="form" id="subDataForm" name="subDataForm">
+									<input type="hidden" id="id" name="id" value="$!result.data.obj.id">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">主题</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="title" name="title" value="$!result.data.obj.title" maxlength="250">
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">投诉客户名称</label>
+										<div class="col-sm-10">
+<!-- 											<input class="form-control" id="customerName" name="" value="$!result.data.obj." maxlength="50"> -->
+											<select id="customerId" name="customerId" class="selectpicker show-tick form-control" data-live-search="true">  
+												<option value="$!result.data.obj.customerId">$!result.data.obj.customerName</option>
+												#foreach($obj in $!result.data.infoList)
+													<option value="$obj.id">$obj.name</option>
+												#end
+						                    </select>  
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">联系人</label>
+										<div class="col-sm-10">
+<!-- 											<input class="form-control" id="contractName" name="" value="$!result.data.obj." maxlength="50"> -->
+											<select class="form-control" id="contractName" name="contractName">
+												<option value="$!result.data.obj.takeUserName">$!result.data.obj.takeUserName</option>
+											</select>
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">收款人</label>
+										<div class="col-sm-10">
+<!-- 											<input class="form-control" id="reciveManName" name="" value="$!result.data.obj." maxlength="50"> -->
+											<select class="form-control" id="reciveManName" name="reciveManName">
+											<option value="$!result.data.obj.reciveManName">$!result.data.obj.reciveManName</option>
+												#foreach($obj in $!result.data.userList)
+													<option value="$obj.id">$obj.name</option>
+												#end
+												
+											</select>
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">类型</label>
+										<div class="col-sm-10">
+<!-- 											<input class="form-control" id="type" name="type" value="$!result.data.obj.type" maxlength="50"> -->
+											<select class="form-control" id="type" name="type">
+												<option value="$!result.data.obj.type">$!result.data.obj.type</option>
+												#foreach($obj in $!result.data.serviceType)
+													<option value="$obj">$obj</option>
+												#end
+											</select>
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">状态</label>
+										<div class="col-sm-10">
+<!-- 											<input class="form-control" id="status" name="status" value="$!result.data.obj.status" maxlength="50"> -->
+												<select class="form-control" id="status" name="status">
+												<option value="$!result.data.obj.status">$!result.data.obj.status</option>
+												#foreach($obj in $!result.data.serviceStatus)
+													<option value="$obj">$obj</option>
+												#end
+											</select>
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">反馈日期</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="feedDate" name="feedDate" value="$!result.data.obj.feedDateStr"  onclick="javascript:WdatePicker({dateFmt:'yyyy-MM-dd'});" maxlength="100">
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">希望解决日期</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="hopeSoleDate" name="hopeSoleDate" value="$!result.data.obj.hopeSoleDateStr" onclick="javascript:WdatePicker({dateFmt:'yyyy-MM-dd'});" maxlength="100">
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">回访日期</label>
+										<div class="col-sm-10">
+											<input class="form-control" id="visitDate" name="visitDate" value="$!result.data.obj.visitDateStr" onclick="javascript:WdatePicker({dateFmt:'yyyy-MM-dd'});" maxlength="100">
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">工程师</label>
+										<div class="col-sm-10">
+											<select id="solvers" name="solvers" class="selectpicker show-tick form-control" multiple data-live-search="true">  
+												<option value="$!result.data.obj.solvers">$!result.data.obj.solvers</option>
+												#foreach($obj in $!result.data.userList)
+													<option value="$obj.id">$obj.name</option>
+												#end
+						                    </select>  
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">客户满意度</label>
+										<div class="col-sm-10">
+											<select class="form-control" id="grade" name="grade">
+												<option value="$!result.data.obj.grade">$!result.data.obj.grade</option>
+												#foreach($obj in $!result.data.serviceGrade)
+													<option value="$obj">$obj</option>
+												#end
+											</select>
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">内容</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="content" name="content" rows="4">$!result.data.obj.content</textarea>
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">处理结果</label>
+										<div class="col-sm-10">
+											<textarea class="form-control" id="result" name="result" rows="4">$!result.data.obj.result</textarea>
+										</div> 
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label"></label>
+										<div class="col-sm-4">
+											<button type="button" class="btn btn-default" id="subBtn">提交</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- /.row (nested) -->
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+	</div>
+	<!-- /. PAGE INNER  -->
+</div>
+
+<script src="$PathHelper.getLocalUrl()pages/customer/js/service-update.js"></script>
+<script src="$PathHelper.getLocalUrl()common/bootsrap-validator/bootstrapValidator.min.js"></script>
+<script src="$PathHelper.getLocalUrl()common/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="$PathHelper.getLocalUrl()common/My97DatePicker/WdatePicker.js"></script>

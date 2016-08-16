@@ -14,5 +14,9 @@ public class Constants {
 	public static final String CUSTOMER_INFO_TRADE_TYPE = "customer_info_trade_type";
 	public static final String CUSTOMER_INFO_CREDIT_LEVEL = "customer_info_credit_level";
 	public static final String CUSTOMER_INFO_SOURCE = "customer_info_source";
+	public static final String CUSTOMER_SERVICE_TYPE = "customer_service_type";
+	public static final String CUSTOMER_SERVICE_STATUS = "customer_service_status";
+	public static final String CUSTOMER_SERVICE_GRADE = "customer_service_grade";
+	
 	public static final String SEX = "sex";
 }
