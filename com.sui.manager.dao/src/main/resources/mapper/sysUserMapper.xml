@@ -4,6 +4,8 @@
   <resultMap id="BaseResultMap" type="com.sui.manager.common.entity.vo.SysUserVo" >
 	<id column="id" property="id" jdbcType="INTEGER" />
 	<result column="name" property="name" jdbcType="VARCHAR" />
+	<result column="password" property="password" jdbcType="VARCHAR" />
+	<result column="login_name" property="loginName" jdbcType="VARCHAR" />
 	<result column="dept" property="dept" jdbcType="VARCHAR" />
 	<result column="office_phone" property="officePhone" jdbcType="VARCHAR" />
 	<result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
@@ -48,6 +50,8 @@
 		</selectKey>  
     insert into sys_user (
 		name,
+		password,
+		login_name,
 		dept,
 		office_phone,
 		mobile_phone,
@@ -59,6 +63,8 @@
 	)
     values (
 		#{name,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{loginName,jdbcType=VARCHAR},
 		#{dept,jdbcType=VARCHAR},
 		#{officePhone,jdbcType=VARCHAR},
 		#{mobilePhone,jdbcType=VARCHAR},
@@ -73,6 +79,8 @@
     update sys_user
     set 
 		name = #{name,jdbcType=VARCHAR},
+		password = #{password,jdbcType=VARCHAR},
+		login_name = #{loginName,jdbcType=VARCHAR},
 		dept = #{dept,jdbcType=VARCHAR},
 		office_phone = #{officePhone,jdbcType=VARCHAR},
 		mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
@@ -89,6 +97,8 @@
     select 
     	id,
 		name,
+		password,
+		loginName,
 		dept,
 		office_phone,
 		mobile_phone,

@@ -116,6 +116,16 @@ $(document).ready(function() {
 	var id = $("#id").val();
 	if(isDataNull(id)){
 		$("#title").attr("readonly", true);
+		
+		var solvers = $("#solversHid").val();
+		if(isDataNull(solvers)){
+			$("#solvers option").each(function() {
+				if (solvers.indexOf($(this).val()) > -1) {
+					$(this).attr("selected", true);
+				}
+			});  
+		}
+		
 	}
 	
 	$('.selectpicker').selectpicker();

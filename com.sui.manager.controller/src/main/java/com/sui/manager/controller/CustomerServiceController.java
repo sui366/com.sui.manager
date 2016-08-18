@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.shunwang.business.framework.mybatis.query.condition.Condition;
 import com.shunwang.business.framework.pojo.Page;
-import com.shunwang.business.framework.spring.mvc.controller.CrudController;
 import com.sui.manager.common.business.Result;
 import com.sui.manager.common.constant.Constants;
 import com.sui.manager.common.entity.po.CustomerInfo;
@@ -28,14 +28,23 @@ import com.sui.manager.common.entity.qo.CustomerServiceQo;
 import com.sui.manager.common.entity.qo.SysUserQo;
 import com.sui.manager.common.entity.vo.CustomerServiceVo;
 import com.sui.manager.common.enums.UserStatusEnum;
+import com.sui.manager.common.util.DateConvert;
+import com.sui.manager.controller.common.BaseController;
 import com.sui.manager.service.CustomerContractService;
 import com.sui.manager.service.CustomerInfoService;
 import com.sui.manager.service.CustomerServiceService;
 import com.sui.manager.service.SysUserService;
 
 @Controller
-public class CustomerServiceController extends CrudController<CustomerService, CustomerServiceService> {
+public class CustomerServiceController extends BaseController<CustomerService, CustomerServiceService> {
 	
+	/**
+	 * @fieldName: serialVersionUID
+	 * @fieldType: long
+	 * @Description: TODO
+	 */
+	private static final long serialVersionUID = -5946990435796564902L;
+
 	private Logger logger = Logger.getLogger(getClass());
 
 	@Autowired
@@ -106,10 +115,14 @@ public class CustomerServiceController extends CrudController<CustomerService, C
 			
 			CustomerService po = bo.get(query.getId());
 			
-//			if(null == )
-			
+			ConvertUtils.register(new DateConvert(), java.util.Date.class);
 			CustomerServiceVo vo = new CustomerServiceVo();
-			BeanUtils.copyProperties(vo, po);
+			try {
+				BeanUtils.copyProperties(vo, po);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			result.setValue("obj", vo);
 		}
 		

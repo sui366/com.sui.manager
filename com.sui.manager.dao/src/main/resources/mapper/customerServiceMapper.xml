@@ -18,10 +18,11 @@
 	<result column="result" property="result" jdbcType="VARCHAR" />
 	<result column="insert_user" property="insertUser" jdbcType="VARCHAR" />
 	<result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+	<result column="customerName" property="customerName" jdbcType="VARCHAR" />
   </resultMap>
   <select id="query" resultMap="BaseResultMap" parameterType="com.shunwang.business.framework.mybatis.query.ConditionQuery">
-		select t.*
-		from customer_service t
+		select t.*,info.name as customerName 
+		from customer_service t left join customer_info info on t.customer_id=info.id 
 		<include refid="conditionQuery.core" />
 		order by
 		<choose>
@@ -40,7 +41,7 @@
   <select id="queryCnt"
 		parameterType="com.shunwang.business.framework.mybatis.query.ConditionQuery"
 		resultType="java.lang.Integer">
-		select count(*) from customer_service t
+		select count(*) from customer_service t left join customer_info info on t.customer_id=info.id 
 		<include refid="conditionQuery.core" />
   </select>
   <delete id="delete" parameterType="java.lang.Integer" >
@@ -109,24 +110,9 @@
 		id = #{id,jdbcType=INTEGER}
   </update>
   <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id,
-		title,
-		customer_id,
-		contract_name,
-		recive_man_name,
-		type,
-		status,
-		feed_date,
-		hope_solve_date,
-		visit_date,
-		solvers,
-		grade,
-		content,
-		result,
-		insert_user,
-		insert_time
-    from customer_service
+    select t.*,info.name as customerName 
+    from customer_service t left join customer_info info on t.customer_id=info.id 
     where 
-		id = #{id,jdbcType=INTEGER}
+		t.id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

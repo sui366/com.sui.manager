@@ -20,6 +20,8 @@ public class SysUser extends BasePojo {
 	private String insertUser;
 	private Timestamp insertTime;
 	private Integer status;
+	private String password;
+	private String loginName;
 
 	public Integer getId() {
 		return id;
@@ -91,6 +93,22 @@ public class SysUser extends BasePojo {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 	
 	
