@@ -20,7 +20,10 @@
                                               您好 $!UserUtil.currentUserName() <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#" onclick="javascript:logOut();"><i class="fa fa-sign-out fa-fw"></i> 退出系统</a>
+                        <li>
+                        	<a href="#" onclick="javascript:updatePwdContent();"><i class="fa fa-sign-out fa-fw"></i> 修改密码</a>
+                        	<a href="#" onclick="javascript:logOut();"><i class="fa fa-sign-out fa-fw"></i> 退出系统</a>
+                        	
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -29,11 +32,100 @@
             </ul>
         </nav>
         
-        <script>
+        <div id="updatePwdContent" style="display: none">
+        
+        <div id="">
+		<div class="">
+			<div class="">
+				<div class="">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-10">
+								<form class="form-horizontal" role="form" id="updatePwdForm" name="updatePwdForm">
+									<div class="form-group">
+										<label class="col-sm-4 control-label">用户名</label>
+										<div class="col-sm-6">
+											<input class="form-control" value="$!VelocityUtil.currentUserName($request)" readonly="readonly">
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-4 control-label">密码</label>
+										<div class="col-sm-6">
+											<input type="password" class="form-control" id="updatePassword" maxlength="50">
+										</div> 
+									</div>
+									<div class="form-group">
+										<label class="col-sm-4 control-label">确认密码</label>
+										<div class="col-sm-6">
+											<input type="password" class="form-control" id="updateComfirmPassword" maxlength="50">
+										</div> 
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label"></label>
+										<div class="col-sm-4">
+											<button type="button" class="btn btn-default" onclick="javascript:updatePwd();">确定</button>
+										</div>
+										<div class="col-sm-4">
+											<button type="button" class="btn btn-default" >取消</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- /.row (nested) -->
+					</div>
+					<!-- /.panel-body -->
+				</div>
+				<!-- /.panel -->
+			</div>
+			<!-- /.col-lg-12 -->
+		</div>
+	</div>
+			
+        </div>
+        
+        <script type="text/javascript">
         	function toBasePage(){
         		window.location.href = pathHelper_localUrl+"homePage.shtml";
         	}
         	function logOut(){
-        		window.location.href = pathHelper_localUrl+"sysLogout.do";
+        		window.location.href = pathHelper_localUrl+"sysLogout.shtml";
+        	}
+        	function updatePwdContent(){
+        		layer.open({
+       			  type: 1,
+       			  title: '修改密码',
+       			  shadeClose: true,
+       			  shade: 0.8,
+       			  area: ['580px', '300px'],
+       			  content: $("#updatePwdContent").html()
+       			}); 
+        	}
+        	function updatePwd(){
+        		var password = $("#updatePassword").val();
+        		var comfirmPassword = $("#updateComfirmPassword").val();
+        		if(!isDataNull(password) || !isDataNull(comfirmPassword)){
+        			return ;
+        		}
+        		if(password != comfirmPassword){
+        			layer.alert("密码与确认密码不一致");
+        		}
+        		var index = layer.load();
+        		$.ajax({
+        			type : "post",
+        			url : pathHelper_localUrl+"sysUser/updatePwd.action",
+        			data : {"password":password},
+        			complete:function(){
+        				layer.close(index);
+        			},
+        			success : function(result) {
+        				if(result.success){
+        					window.location.href = pathHelper_localUrl+"sysLogout.shtml";
+        				}else{
+        					layer.alert(result.message);
+        				}
+        			}
+        		});
         	}
         </script>

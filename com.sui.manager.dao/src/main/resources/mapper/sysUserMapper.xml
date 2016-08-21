@@ -98,7 +98,7 @@
     	id,
 		name,
 		password,
-		loginName,
+		login_name,
 		dept,
 		office_phone,
 		mobile_phone,

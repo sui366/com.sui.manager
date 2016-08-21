@@ -17,6 +17,12 @@ PageUpdate.prototype = {
 	                    notEmpty: {  message: '姓名不能为空' },
 	                    stringLength:{max:100, message: '长度不能超过100个字符'}
 	                }
+	            },
+	            loginName: {
+	                validators: {
+	                    notEmpty: {  message: '登录名不能为空' },
+	                    stringLength:{max:50, message: '长度不能超过50个字符'}
+	                }
 	            }
 	        }
 	    });
@@ -65,6 +71,7 @@ $(document).ready(function() {
 	var id = $("#id").val();
 	if(isDataNull(id)){
 		$("#name").attr("readonly", true);
+		$("#loginName").attr("readonly", true);
 	}
 	
 	

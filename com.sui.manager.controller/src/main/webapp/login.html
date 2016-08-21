@@ -18,6 +18,10 @@
         <link rel="stylesheet" type="text/css" href="/common/login/login.css" />
         <link rel="stylesheet" type="text/css" href="/common/login/style.css" />
 		<link rel="stylesheet" type="text/css" href="/common/login/animate-custom.css" />
+		
+		 <script src="/common/js/jquery-1.12.3.min.js"></script>
+		 <script src="/common/layer/layer.js"></script>
+		
     </head>
     <body>
         <div class="container">
@@ -49,7 +53,7 @@
                     <a class="hiddenanchor" id="tologin"></a>
                     <div id="wrapper">
                         <div id="login" class="animate form">
-                            <form  action="mysuperscript.php" autocomplete="on"> 
+                            <form  action="" autocomplete="on"> 
                                 <h1>登录</h1> 
                                 <p> 
                                     <label for="username" class="uname"  > 用户名 </label>
@@ -64,7 +68,7 @@
 <!-- 									<label for="loginkeeping">Keep me logged in</label> -->
 <!-- 								</p> -->
                                 <p class="login button"> 
-                                    <input type="submit" value="确定" /> 
+                                    <input type="button" value="确定" onclick="javascript:checkLogin();" /> 
 								</p>
 <!--                                 <p class="change_link"> -->
 <!-- 									Not a member yet ? -->
@@ -108,3 +112,24 @@
         </div>
     </body>
 </html>
+
+<script type="text/javascript">
+	function checkLogin(){
+		var index = layer.load();
+ 		$.ajax({
+			type : "post",
+			url : "/sysUser/checkLogin.action",
+			data : {"loginName":$("#username").val(),"password":$("#password").val()},
+			complete:function(){
+				layer.close(index);
+			},
+			success : function(result) {
+				if(result.success){
+					window.location.href= "/homePage.shtml";
+				}else{
+					layer.alert(result.message);
+				}
+			}
+		});
+	}
+</script>

@@ -10,6 +10,10 @@ public class SysUserQo extends PageQo {
 	private Integer status;
 	
 	private String name;
+	
+	private String loginName;
+	
+	private String password;
 
 	@SingleValue(column = "id", equal = "=")
 	public Integer getId() {
@@ -36,6 +40,24 @@ public class SysUserQo extends PageQo {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@SingleValue(column = "login_name", equal = "=")
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+	@SingleValue(column = "password", equal = "=")
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	

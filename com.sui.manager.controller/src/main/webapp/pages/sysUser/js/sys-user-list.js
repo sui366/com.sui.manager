@@ -39,14 +39,33 @@ PageList.prototype = {
 		  layer.closeAll();
 		});
 	},
-
 	actionFormatter:function(value, row, index) {
-	    return [
-	            '<button type="button" class="btn btn-default resend" onclick="javascript:pageList.toUpdatePage('+row.id+');">&nbsp;修&nbsp;改&nbsp;</button>',
-	            '<button type="button" class="btn btn-default resend" onclick="javascript:pageList.deleteObj('+row.id+');">&nbsp;删&nbsp;除&nbsp;</button>'
-	    ].join('');
+		var buttons = [];
+		buttons.push('<button type="button" class="btn btn-default resend" onclick="javascript:pageList.toUpdatePage('+row.id+');">&nbsp;修&nbsp;改&nbsp;</button>');
+		buttons.push('<button type="button" class="btn btn-default resend" onclick="javascript:pageList.deleteObj('+row.id+');">&nbsp;删&nbsp;除&nbsp;</button>');
+		if(isDataNull(currentUserName) && "admin" != row.loginName){
+			buttons.push('<button type="button" class="btn btn-default resend" onclick="javascript:pageList.resetPwd('+row.id+');">重置密码</button>');
+		}
+		return buttons.join('');
+	},
+	resetPwd:function(id){
+		var index = layer.load();
+		$.ajax({
+			type : "post",
+			url : pathHelper_localUrl+"sysUser/resetPwd.action",
+			data : {"id":id},
+			complete:function(){
+				layer.close(index);
+			},
+			success : function(result) {
+				if(result.success){
+					layer.alert("密码重置成功！");
+				}else{
+					layer.alert(result.message);
+				}
+			}
+		});
 	}
-	
 	
 }
 

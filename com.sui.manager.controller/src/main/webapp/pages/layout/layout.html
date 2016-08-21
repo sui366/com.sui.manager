@@ -10,8 +10,7 @@
 
 <body>
 	<input type="hidden" id="pathHelper_localUrl" value="$!PathHelper.getLocalUrl()">
-	<input type="hidden" id="auth_url" value="$!UserUtil.authPath()">
-	<input type="hidden" id="currentUserName" value="$!UserUtil.currentUserName()">
+	<input type="hidden" id="currentUserName" value="$!VelocityUtil.currentUserName($request)">
 	
     <div id="wrapper">
        #parse("layout/checkLogin.html")  

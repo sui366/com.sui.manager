@@ -31,6 +31,15 @@ public class HomeController extends CrudController<SysUser, SysUserService> {
 		return new ModelAndView("welcome").addObject("result", result);
 	}
 	
+	@RequestMapping("/sysLogout.shtml")
+	public ModelAndView sysLogout(HttpServletRequest request) throws Exception{
+		request.getSession().invalidate();
+		request.getSession().setMaxInactiveInterval(0);
+//		Result result = new Result(request);
+		
+		return new ModelAndView("welcome");
+	}
+	
 	/**
 	 * 跳到更新页面
 	 */
